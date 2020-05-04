@@ -2,6 +2,7 @@
 {
     using Escolar2020.Web.Data;
     using Escolar2020.Web.Data.Entity;
+    using Escolar2020.Web.Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -30,7 +31,7 @@
                 cfg.Password.RequireLowercase = false;
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequireUppercase = false;
-                cfg.Password.RequiredLength = 6; 
+                cfg.Password.RequiredLength = 6;
             })
             .AddEntityFrameworkStores<DataContext>();
 
@@ -41,15 +42,14 @@
             //Ejecuta el llenado de la Base de datos y mata la conexion al terminar
             services.AddTransient<SeedDb>();
             //La Inyeccion Queda viva
-            //services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ITutorRepository, TutorRepository>();
+            services.AddScoped<IUserHelper, UserHelper>();
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -68,7 +68,7 @@
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseAuthentication(); 
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

@@ -1,23 +1,25 @@
 ﻿namespace Escolar2020.Web.Controllers
 {
-    using Escolar2020.Web.Data;
+    using System.Threading.Tasks;
+    using Data;
+    using Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
-    using System.Threading.Tasks;
     public class App_TutorController : Controller
     {
-        private readonly DataContext _context;
+        private readonly ITutorRepository tutorRepository;
+        private readonly IUserHelper userHelper;
 
-        public App_TutorController(DataContext context)
+        public App_TutorController(ITutorRepository tutorRepository, IUserHelper userHelper)
         {
-            _context = context;
+            this.tutorRepository = tutorRepository;
+            this.userHelper = userHelper;
         }
 
         // GET: App_Tutor
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.App_Tutors.ToListAsync());
+            return View(this.tutorRepository.GetAll());
         }
 
         // GET: App_Tutor/Details/5
@@ -28,8 +30,7 @@
                 return NotFound();
             }
 
-            var app_Tutor = await _context.App_Tutors
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var app_Tutor = await this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
                 return NotFound();
@@ -53,22 +54,22 @@
         {
             if (ModelState.IsValid)
             {
-                _context.Add(app_Tutor);
-                await _context.SaveChangesAsync();
+                app_Tutor.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
+                await this.tutorRepository.CreateAsync(app_Tutor);
                 return RedirectToAction(nameof(Index));
             }
             return View(app_Tutor);
         }
 
         // GET: App_Tutor/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var app_Tutor = await _context.App_Tutors.FindAsync(id);
+            var app_Tutor = this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
                 return NotFound();
@@ -81,23 +82,18 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, App_Tutor app_Tutor)
+        public async Task<IActionResult> Edit(App_Tutor app_Tutor)
         {
-            if (id != app_Tutor.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(app_Tutor);
-                    await _context.SaveChangesAsync();
+                    app_Tutor.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
+                    await this.tutorRepository.UpdateAsync(app_Tutor);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!App_TutorExists(app_Tutor.Id))
+                    if (!await this.tutorRepository.ExistAsync(app_Tutor.Id))
                     {
                         return NotFound();
                     }
@@ -112,15 +108,14 @@
         }
 
         // GET: App_Tutor/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var app_Tutor = await _context.App_Tutors
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var app_Tutor = this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
                 return NotFound();
@@ -134,15 +129,9 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var app_Tutor = await _context.App_Tutors.FindAsync(id);
-            _context.App_Tutors.Remove(app_Tutor);
-            await _context.SaveChangesAsync();
+            var app_Tutor = await this.tutorRepository.GetByIdAsync(id);
+            await this.tutorRepository.DeleteAsync(app_Tutor);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool App_TutorExists(int id)
-        {
-            return _context.App_Tutors.Any(e => e.Id == id);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿namespace Escolar2020.Web.Data
 {
-    using Escolar2020.Web.Data.Entity;
     using System;
     using System.ComponentModel.DataAnnotations;
-
-    public class App_Alumno
+    using Entity;
+    public class App_Alumno : IEntity
     {
         public int Id { get; set; }
 

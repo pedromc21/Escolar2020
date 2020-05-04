@@ -4,7 +4,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class App_Tutor
+    public class App_Tutor : IEntity
     {
         public int Id { get; set; }
 
