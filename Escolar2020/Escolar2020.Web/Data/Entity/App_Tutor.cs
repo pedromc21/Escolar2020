@@ -1,6 +1,6 @@
-﻿namespace Escolar2020.Web.Data
+﻿namespace Escolar2020.Web.Data.Entity
 {
-    using Escolar2020.Web.Data.Entity;
+    //using Escolar2020.Web.Data.Entity;
     using System;
     using System.ComponentModel.DataAnnotations;
 
@@ -9,8 +9,8 @@
         public int Id { get; set; }
 
         public int Persona_Id { get; set; }
-
-        [MaxLength(50, ErrorMessage = "El Campo {0} debe de tener {1} de longitud")]
+        //, ErrorMessage = "El Campo {0} debe de tener {1} de longitud"
+        [MaxLength(50)]
         [Required]
         [Display(Name = "Clave Familia")]
         public string Clave_Familia { get; set; }
@@ -46,7 +46,7 @@
 
         [MaxLength(250)]
         [Display(Name = "Puesto")]
-        public int Puesto_Empresa { get; set; }
+        public string Puesto_Empresa { get; set; }
 
         [MaxLength(150)]
         [Display(Name = "Telefono Trabajo")]

@@ -1,6 +1,6 @@
 ﻿namespace Escolar2020.Web.Data
 {
-    using Escolar2020.Web.Data.Entity;
+    using Entity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     public class DataContext : IdentityDbContext<App_User>

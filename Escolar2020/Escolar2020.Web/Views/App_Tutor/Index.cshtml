@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Escolar2020.Web.Data.App_Tutor>
+﻿@model IEnumerable<Escolar2020.Web.Data.Entity.App_Tutor>
 
 @{
     ViewData["Title"] = "Index";
@@ -142,7 +142,10 @@
                 @Html.DisplayFor(modelItem => item.Clave_Institucional)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm">Editar</a> |
