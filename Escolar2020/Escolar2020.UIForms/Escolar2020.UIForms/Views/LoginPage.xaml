@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Escolar2020.UIForms.Views.LoginPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Login">
+    <ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding Login}">
+            <StackLayout
+                Padding="8">
+                <Label Text="Usuario:"></Label>
+                <Entry Placeholder="Escribe tu usuario" Text="{Binding Email}"></Entry>
+                <Label Text="Contraseña:"></Label>
+                <Entry IsPassword="True" Placeholder="Escribe tu contraseña" Text="{Binding Pasword}"></Entry>
+                <Button Command="{Binding LoginCommand}" Text="Login"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

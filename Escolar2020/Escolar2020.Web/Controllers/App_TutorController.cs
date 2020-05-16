@@ -8,6 +8,9 @@
     using Microsoft.EntityFrameworkCore;
     using System.IO;
     using System.Threading.Tasks;
+    using System.Linq;
+    using System;
+
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;
@@ -22,7 +25,7 @@
         // GET: App_Tutor
         public IActionResult Index()
         {
-            return View(this.tutorRepository.GetAll());
+            return View(this.tutorRepository.GetAll().OrderBy(p => p.Clave_Familia));
         }
 
         // GET: App_Tutor/Details/5
@@ -61,14 +64,16 @@
                 var path = string.Empty;
                 if (view.ImageFile != null && view.ImageFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
                     path = Path.Combine(Directory.GetCurrentDirectory(), 
-                        "wwwroot\\images\\Tutors", 
-                        view.ImageFile.FileName);
+                        "wwwroot\\images\\Tutors",
+                        file); //view.ImageFile.FileName
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
-                    path = $"~/images/Tutors/{view.ImageFile.FileName}";
+                    path = $"~/images/Tutors/{file}";
                 }
                 var app_Tutor = this.Toapp_Tutor(view, path);
                 app_Tutor.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
@@ -170,14 +175,16 @@
                     var path = view.ImageUrl;
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
                         path = Path.Combine(Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Tutors",
-                            view.ImageFile.FileName);
+                            file); //view.ImageFile.FileName
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await view.ImageFile.CopyToAsync(stream);
                         }
-                        path = $"~/images/Tutors/{view.ImageFile.FileName}";
+                        path = $"~/images/Tutors/{file}";
                     }
                     view.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
                     var app_Tutor = this.Toapp_Tutor(view, path);
@@ -200,20 +207,21 @@
         }
 
         // GET: App_Tutor/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var app_Tutor = this.tutorRepository.GetByIdAsync(id.Value);
+            var app_Tutor = await this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
                 return NotFound();
             }
-
-            return View(app_Tutor);
+            var view = this.ToApp_TutorViewModel(app_Tutor);
+            return View(view);
+            //return View(app_Tutor);
         }
 
         // POST: App_Tutor/Delete/5

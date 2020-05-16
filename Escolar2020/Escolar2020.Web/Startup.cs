@@ -60,14 +60,26 @@
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging_2"))
+            {
+                app.UseExceptionHandler("/Error");
+            }
+            /*else
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
-            }
+            }*/
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            /*Nuevo
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+            });*/
+            //______
             app.UseAuthentication();
             app.UseCookiePolicy();
 

@@ -17,7 +17,8 @@
         public IActionResult GetTutors()
         {
             //Regresa todos los datos del controlador Tutor, tengo que hacer que salga solo los tutores de la familia.
-            return Ok(this.tutorRepository.GetAll());
+            return Ok(this.tutorRepository.GetAllWithUsers());
+            //.OrderBy(p => p.Clave_Familia)
         }
 
     }

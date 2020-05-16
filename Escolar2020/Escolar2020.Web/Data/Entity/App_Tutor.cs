@@ -84,5 +84,16 @@
         public string ImageUrl { get; set; }
 
         public App_User User { get; set; }
+
+        public string ImageFullPath {
+            get
+            {
+                if (string.IsNullOrEmpty(this.ImageUrl))
+                {
+                    return null;
+                }
+                return $"http://www.gissa.com.mx{this.ImageUrl.Substring(1)}";
+            }
+        }
     }
 }
