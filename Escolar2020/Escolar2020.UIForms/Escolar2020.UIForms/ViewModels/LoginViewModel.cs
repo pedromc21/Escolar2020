@@ -13,7 +13,7 @@
         public LoginViewModel()
         {
             this.Email = "Pedro";
-
+            this.Pasword = "12345";
         }
         private async void Login()
         {

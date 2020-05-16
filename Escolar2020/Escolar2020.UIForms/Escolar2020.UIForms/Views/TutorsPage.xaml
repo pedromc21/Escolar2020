@@ -29,13 +29,14 @@
                                 	Grid.Column="1"
                                 	VerticalOptions="Center">
                                     <Label
-                                    	Text="{Binding ClaveFamilia}"
+                                    	FontAttributes="Bold"
+                                    	FontSize="Medium"
+                                        Text="{Binding ClaveFamilia}"
                                     	TextColor="Black">
                                     </Label>
                                     <Label
-                                    	FontAttributes="Bold"
-                                    	FontSize="Medium"
-                                    	Text="{Binding ApellidoPaterno ApellidoMaterno}"
+                                    	FontSize="Small"
+                                    	Text= "{Binding Name}"
                                     	TextColor="Black">
                                     </Label>
                                 </StackLayout>

@@ -79,5 +79,12 @@
         {
             return $"{this.ClaveFamilia} {this.ApellidoPaterno} {this.ApellidoMaterno} {this.Nombres}"; 
         }
+        public string Name
+        {
+            get
+            {
+                return $" {this.ApellidoPaterno} {this.ApellidoMaterno} {this.Nombres}";
+            }
+        }
     }
 }
