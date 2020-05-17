@@ -6,11 +6,13 @@
     using Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Authorization;
     using System.IO;
     using System.Threading.Tasks;
     using System.Linq;
     using System;
-
+    
+    [Authorize]
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;
@@ -76,7 +78,7 @@
                     path = $"~/images/Tutors/{file}";
                 }
                 var app_Tutor = this.Toapp_Tutor(view, path);
-                app_Tutor.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
+                app_Tutor.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.tutorRepository.CreateAsync(app_Tutor);
                 return RedirectToAction(nameof(Index));
             }
@@ -186,7 +188,7 @@
                         }
                         path = $"~/images/Tutors/{file}";
                     }
-                    view.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
+                    view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     var app_Tutor = this.Toapp_Tutor(view, path);
                     await this.tutorRepository.UpdateAsync(app_Tutor);
                 }
