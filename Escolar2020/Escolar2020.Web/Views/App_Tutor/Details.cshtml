@@ -23,40 +23,10 @@
             @Html.DisplayFor(model => model.Clave_Familia)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Apellido_Paterno)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Apellido_Paterno)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Apellido_Materno)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Apellido_Materno)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombres)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nombres)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Parentesco)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Parentesco)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha_Nacimiento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fecha_Nacimiento)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Sexo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sexo)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Profesion)
@@ -82,69 +52,9 @@
         <dd>
             @Html.DisplayFor(model => model.Telefono_Trabajo)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Celular)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Celular)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EMail)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.EMail)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Usuario)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Clave)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Clave)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email_Institucional)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email_Institucional)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario_Institucional)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Usuario_Institucional)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Clave_Institucional)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Clave_Institucional)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd>
-            @if (!string.IsNullOrEmpty(Model.ImageUrl))
-            {
-                <img src="@Url.Content(Model.ImageUrl)" alt="Image" style="width:200px;height:300px;max-width: 100%; height: auto;" />
-            }
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Persona_Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

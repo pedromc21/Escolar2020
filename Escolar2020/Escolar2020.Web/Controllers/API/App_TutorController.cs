@@ -1,9 +1,12 @@
 ﻿namespace Escolar2020.Web.Controllers.API
 {
-    using Escolar2020.Web.Data;
+    using Web.Data;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;

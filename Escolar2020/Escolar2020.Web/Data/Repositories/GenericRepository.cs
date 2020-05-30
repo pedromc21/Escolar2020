@@ -1,18 +1,19 @@
 ﻿namespace Escolar2020.Web.Data
 {
-	using System.Linq;
-	using System.Threading.Tasks;
-	using Microsoft.EntityFrameworkCore;
-	using Entity;
 
+    using Entity;
+    using System.Linq;
+	using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+	
 	public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
-	{
+    {
 		private readonly DataContext context;
 
-		public GenericRepository(DataContext context)
+        public GenericRepository(DataContext context)
 		{
 			this.context = context;
-		}
+        }
 
 		public IQueryable<T> GetAll()
 		{
@@ -23,8 +24,8 @@
 		{
 			return await this.context.Set<T>()
 				.AsNoTracking()
-				.FirstOrDefaultAsync(e => e.Id == id);
-		}
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
 
 		public async Task CreateAsync(T entity)
 		{

@@ -8,6 +8,10 @@
         public int Persona_Id { get; set; }
 
         [Required]
+        [Display(Name = "Rol")]
+        public string Rol { get; set; }
+
+        [Required]
         [Display(Name = "Clave Familia")]
         public string Clave_Familia { get; set; }
 

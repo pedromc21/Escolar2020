@@ -1,7 +1,7 @@
 ﻿namespace Escolar2020.Web.Controllers
 {
     using Data;
-    using Data.Entity;
+    using Data.Entity.Personas;
     using Models;
     using Helpers;
     using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,6 @@
     using System.Linq;
     using System;
     
-    [Authorize]
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;
@@ -23,7 +22,7 @@
             this.tutorRepository = tutorRepository;
             this.userHelper = userHelper;
         }
-
+        [Authorize]
         // GET: App_Tutor
         public IActionResult Index()
         {
@@ -35,20 +34,21 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
 
             var app_Tutor = await this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
             var view = this.ToApp_TutorViewModel(app_Tutor);
             return View(view);
             //return View(app_Tutor);
         }
-
+        
         // GET: App_Tutor/Create
+        //[Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -63,7 +63,7 @@
         {
             if (ModelState.IsValid)
             {
-                var path = string.Empty;
+                /*var path = string.Empty;
                 if (view.ImageFile != null && view.ImageFile.Length > 0)
                 {
                     var guid = Guid.NewGuid().ToString();
@@ -76,33 +76,32 @@
                         await view.ImageFile.CopyToAsync(stream);
                     }
                     path = $"~/images/Tutors/{file}";
-                }
-                var app_Tutor = this.Toapp_Tutor(view, path);
-                app_Tutor.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                }*/
+                var app_Tutor = this.Toapp_Tutor(view); //, path
+                //app_Tutor.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.tutorRepository.CreateAsync(app_Tutor);
                 return RedirectToAction(nameof(Index));
             }
             return View(view);
         }
-        private App_Tutor Toapp_Tutor(App_TutorViewModel view, string path)
+        private App_Tutor Toapp_Tutor(App_TutorViewModel view) //, string path
         {
             return new App_Tutor
             {
-                Id = view.Id,
-                ImageUrl=path,
+                //ImageUrl=path,
                 Persona_Id = view.Persona_Id,
                 Clave_Familia = view.Clave_Familia,
-                Apellido_Paterno = view.Apellido_Paterno,
+                /*Apellido_Paterno = view.Apellido_Paterno,
                 Apellido_Materno = view.Apellido_Materno,
-                Nombres = view.Nombres,
+                Nombres = view.Nombres,*/
                 Parentesco = view.Parentesco,
-                Fecha_Nacimiento = view.Fecha_Nacimiento,
-                Sexo = view.Sexo,
+                /*Fecha_Nacimiento = view.Fecha_Nacimiento,
+                Sexo = view.Sexo,*/
                 Profesion = view.Profesion,
                 Nombre_Empresa = view.Nombre_Empresa,
                 Puesto_Empresa = view.Puesto_Empresa,
                 Telefono_Trabajo = view.Telefono_Trabajo,
-                Telefono = view.Telefono,
+                /*Telefono = view.Telefono,
                 Celular = view.Celular,
                 EMail = view.EMail,
                 Usuario = view.Usuario,
@@ -110,22 +109,23 @@
                 Email_Institucional = view.Email_Institucional,
                 Usuario_Institucional = view.Usuario_Institucional,
                 Clave_Institucional = view.Clave_Institucional,
-                User = view.User 
+                User = view.User */
             };
         }
-
+        
         // GET: App_Tutor/Edit/5
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
 
             var app_Tutor = await this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
             var view = this.ToApp_TutorViewModel(app_Tutor);
             //view.User = await this.userHelper.GetUserByEmailAsync("pedromc219@gmail.com");
@@ -137,20 +137,20 @@
         {
             return new App_TutorViewModel
             {
-                Id = app_Tutor.Id,
+                //ImageUrl=path,
                 Persona_Id = app_Tutor.Persona_Id,
                 Clave_Familia = app_Tutor.Clave_Familia,
-                Apellido_Paterno = app_Tutor.Apellido_Paterno,
+                /*Apellido_Paterno = app_Tutor.Apellido_Paterno,
                 Apellido_Materno = app_Tutor.Apellido_Materno,
-                Nombres = app_Tutor.Nombres,
+                Nombres = app_Tutor.Nombres,*/
                 Parentesco = app_Tutor.Parentesco,
-                Fecha_Nacimiento = app_Tutor.Fecha_Nacimiento,
-                Sexo = app_Tutor.Sexo,
+                /*Fecha_Nacimiento = app_Tutor.Fecha_Nacimiento,
+                Sexo = app_Tutor.Sexo,*/
                 Profesion = app_Tutor.Profesion,
                 Nombre_Empresa = app_Tutor.Nombre_Empresa,
                 Puesto_Empresa = app_Tutor.Puesto_Empresa,
                 Telefono_Trabajo = app_Tutor.Telefono_Trabajo,
-                Telefono = app_Tutor.Telefono,
+                /*Telefono = app_Tutor.Telefono,
                 Celular = app_Tutor.Celular,
                 EMail = app_Tutor.EMail,
                 Usuario = app_Tutor.Usuario,
@@ -158,8 +158,7 @@
                 Email_Institucional = app_Tutor.Email_Institucional,
                 Usuario_Institucional = app_Tutor.Usuario_Institucional,
                 Clave_Institucional = app_Tutor.Clave_Institucional,
-                ImageUrl = app_Tutor.ImageUrl,
-                User = app_Tutor.User
+                User = app_Tutor.User */
             };
         }
 
@@ -174,7 +173,7 @@
             {
                 try
                 {
-                    var path = view.ImageUrl;
+                    /*var path = view.ImageUrl;
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
                         var guid = Guid.NewGuid().ToString();
@@ -188,15 +187,15 @@
                         }
                         path = $"~/images/Tutors/{file}";
                     }
-                    view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
-                    var app_Tutor = this.Toapp_Tutor(view, path);
+                    view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);*/
+                    var app_Tutor = this.Toapp_Tutor(view); //, path
                     await this.tutorRepository.UpdateAsync(app_Tutor);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await this.tutorRepository.ExistAsync(view.Id))
+                    if (!await this.tutorRepository.ExistAsync(view.Persona_Id))
                     {
-                        return NotFound();
+                        return new NotFoundViewResult("TutorNotFound");
                     }
                     else
                     {
@@ -209,17 +208,18 @@
         }
 
         // GET: App_Tutor/Delete/5
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
 
             var app_Tutor = await this.tutorRepository.GetByIdAsync(id.Value);
             if (app_Tutor == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("TutorNotFound");
             }
             var view = this.ToApp_TutorViewModel(app_Tutor);
             return View(view);
@@ -235,5 +235,10 @@
             await this.tutorRepository.DeleteAsync(app_Tutor);
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult TutorNotFound()
+        {
+            return this.View();
+        }
+
     }
 }

@@ -11,6 +11,9 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,7 +28,7 @@
         {
             services.AddIdentity<App_User, IdentityRole>(cfg =>
             {
-                cfg.User.RequireUniqueEmail = true;
+                cfg.User.RequireUniqueEmail = false; //true
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequiredUniqueChars = 0;
                 cfg.Password.RequireLowercase = false;
@@ -34,6 +37,18 @@
                 cfg.Password.RequiredLength = 6;
             })
             .AddEntityFrameworkStores<DataContext>();
+
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = this.Configuration["Tokens:Issuer"],
+                        ValidAudience = this.Configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+                    };
+                });
 
             services.AddDbContext<DataContext>(cfg =>
             {
@@ -50,6 +65,11 @@
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/NotAuthorized";
+                options.AccessDeniedPath = "/Account/NotAuthorized";
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -62,24 +82,14 @@
             }
             if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("Staging_2"))
             {
-                app.UseExceptionHandler("/Error");
-            }
-            /*else
-            {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
-            }*/
+            }
+
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            /*Nuevo
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });*/
-            //______
             app.UseAuthentication();
             app.UseCookiePolicy();
 

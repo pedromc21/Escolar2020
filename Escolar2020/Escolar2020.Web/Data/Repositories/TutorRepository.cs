@@ -1,6 +1,6 @@
 ﻿namespace Escolar2020.Web.Data
-{
-    using Entity;
+{   
+    using Entity.Personas;
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
 
@@ -15,7 +15,7 @@
 
         public IQueryable GetAllWithUsers()
         {
-            return this.context.App_Tutors.Include(p => p.User); 
+            return this.context.App_Tutors.Include(p => p.Clave_Familia); 
         }
     }
 }

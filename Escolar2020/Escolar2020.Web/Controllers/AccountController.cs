@@ -2,18 +2,28 @@
 {
     using System.Threading.Tasks;
     using System.Linq;
+    using System.Text;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+    using System;
     using Web.Data.Entity;
     using Web.Helpers;
     using Web.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
-
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.IdentityModel.Tokens;
+    
     public class AccountController : Controller
     {
         private readonly IUserHelper userHelper;
-        public AccountController(IUserHelper userHelper)
+        public readonly IConfiguration configuration;
+
+        public AccountController(IUserHelper userHelper,
+            IConfiguration configuration)
         {
             this.userHelper = userHelper;
+            this.configuration = configuration;
         }
         public IActionResult Login()
         {
@@ -57,14 +67,14 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(model.Username);
+                var user = await this.userHelper.GetUserByLoginAsync(model.Username);
                 if (user == null)
                 {
                     user = new App_User
                     {
                         Persona_Id = model.Persona_Id,
                         Clave_Familia = model.Clave_Familia,
-                        Table = "Tutor",
+                        Rol = model.Rol,
                         Email = model.Email,
                         UserName = model.Username
                     };
@@ -100,7 +110,7 @@
         public async Task<IActionResult> ChangeUser()
         {
             //todo: Validar que aqui pide el Email y necesito pasar la clave familia.
-            var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+            var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
             var model = new ChangeUserViewModel();
             if (user != null)
             {
@@ -114,7 +124,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
                 if (user != null)
                 {
                     user.Persona_Id = model.Persona_Id;
@@ -145,7 +155,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
                 if (user != null)
                 {
                     var result = await this.userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
@@ -166,5 +176,47 @@
 
             return this.View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userHelper.GetUserByLoginAsync(model.Username);
+                if (user != null)
+                {
+                    var result = await this.userHelper.ValidatePasswordAsync(
+                        user,
+                        model.Password);
+                    if (result.Succeeded)
+                    {
+                        var claims = new[]
+                        {
+                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                        };
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Tokens:Key"]));
+                        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var token = new JwtSecurityToken(
+                            this.configuration["Tokens:Issuer"],
+                            this.configuration["Tokens:Audience"],
+                            claims,
+                            expires: DateTime.UtcNow.AddDays(15),
+                            signingCredentials: credentials);
+                        var results = new
+                        {
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiration = token.ValidTo
+                        };
+                        return this.Created(string.Empty, results);
+                    }
+                }
+            }
+            return this.BadRequest();
+        }
+        public IActionResult NotAuthorized()
+        {
+            return this.View();
+        }
+
     }
 }

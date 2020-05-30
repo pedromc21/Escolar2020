@@ -1,11 +1,12 @@
 ﻿namespace Escolar2020.Web.Data
 {
-	using System.Linq;
+    using System.Collections.Generic;
+    using System.Linq;
 	using System.Threading.Tasks;
 
 	public interface IGenericRepository<T> where T : class
 	{
-		IQueryable<T> GetAll();
+        IQueryable<T> GetAll();
 
 		Task<T> GetByIdAsync(int id);
 
