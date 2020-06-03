@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Entity\Mapping\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\images\Tutors\" />
   </ItemGroup>

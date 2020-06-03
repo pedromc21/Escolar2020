@@ -1,7 +1,7 @@
 ﻿namespace Escolar2020.Web.Helpers
 {
     using System.Threading.Tasks;
-    using Data.Entity;
+    using Data.Entity.Personas;
     using Web.Models;
     using Microsoft.AspNetCore.Identity;
     public interface IUserHelper
@@ -18,5 +18,7 @@
         Task CheckRoleAsync(string rolename);
         Task AddUserToRoleAsync(App_User user, string rolename);
         Task<bool>  IsUserInRoleAsync(App_User user, string rolename);
+        Task<string> GetUserNameAsync(int id);
+
     }
 }

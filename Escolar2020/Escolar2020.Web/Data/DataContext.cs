@@ -1,6 +1,5 @@
 ﻿namespace Escolar2020.Web.Data
 {
-    using Entity;
     using Entity.Personas;
     using Entity.Catalogos;
     using Entity.Pagos;

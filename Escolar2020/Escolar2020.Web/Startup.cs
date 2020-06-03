@@ -1,7 +1,8 @@
 ﻿namespace Escolar2020.Web
 {
     using Escolar2020.Web.Data;
-    using Escolar2020.Web.Data.Entity;
+    using Escolar2020.Web.Data.Entity.Personas;
+    using Escolar2020.Web.Data.Repositories;
     using Escolar2020.Web.Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;

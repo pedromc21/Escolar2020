@@ -1,6 +1,5 @@
-﻿namespace Escolar2020.Web.Data.Entity
+﻿namespace Escolar2020.Web.Data.Entity.Personas
 {
-    using Personas;
     using Microsoft.AspNetCore.Identity;
     public class App_User : IdentityUser
     {

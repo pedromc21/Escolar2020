@@ -3,26 +3,33 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Tutores</h2>
-
-<p>
-    <a asp-action="Create">Crear Nuevo Tutor</a>
-</p>
+<h2>Tutores de la familia</h2>
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th hidden="hidden">
                 @Html.DisplayNameFor(model => model.Persona_Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Clave_Familia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Parentesco)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Profesion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNac)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre_Empresa)
@@ -38,17 +45,32 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td hidden="hidden">
+                @Html.HiddenFor(modelItem => item.Persona_Id)
+            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Persona_Id)
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="@Url.Content(item.ImageUrl)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Clave_Familia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Parentesco)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Profesion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNac)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre_Empresa)
@@ -60,11 +82,10 @@
                 @Html.DisplayFor(modelItem => item.Telefono_Trabajo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Persona_Id" class="btn btn-success btn-sm">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Persona_Id" class="btn btn-warning btn-sm">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.Persona_Id" class="btn btn-danger btn-sm">Eliminar</a>
+                <a asp-action="Details" asp-route-id="@item.Persona_Id" class="btn btn-warning btn-sm">Detalle</a> | 
+                <a asp-action="Edit" asp-route-id="@item.Persona_Id" class="btn btn-info btn-sm">Editar</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

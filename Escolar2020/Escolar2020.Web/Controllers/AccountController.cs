@@ -6,7 +6,7 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System;
-    using Web.Data.Entity;
+    using Web.Data.Entity.Personas;
     using Web.Helpers;
     using Web.Models;
     using Microsoft.AspNetCore.Mvc;
@@ -74,7 +74,6 @@
                     {
                         Persona_Id = model.Persona_Id,
                         Clave_Familia = model.Clave_Familia,
-                        Rol = model.Rol,
                         Email = model.Email,
                         UserName = model.Username
                     };
@@ -111,11 +110,14 @@
         {
             //todo: Validar que aqui pide el Email y necesito pasar la clave familia.
             var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
+            string NamePerson = this.userHelper.GetUserNameAsync(user.Persona_Id).Result;  //userHelper.GetUserByLoginAsync(this.User.Identity.Name);
             var model = new ChangeUserViewModel();
             if (user != null)
             {
                 model.Persona_Id = user.Persona_Id;
                 model.Clave_Familia = user.Clave_Familia;
+                model.Usuario = user.UserName;
+                model.NombreUsuario = NamePerson;
             }
             return this.View(model);
         }

@@ -1,10 +1,10 @@
 ﻿namespace Escolar2020.Web.Controllers.API
 {
-    using Web.Data;
+    using Data.Repositories;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
+    
     [Route("api/[Controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class App_TutorController : Controller

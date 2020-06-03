@@ -2,14 +2,14 @@
 namespace Escolar2020.Web.Data
 {
     using Entity;
-    using Entity.Personas;
-    using Helpers;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using Entity.Personas;
+    using Helpers;
+    using Microsoft.AspNetCore.Identity;
     using System.Linq;
     using System.Threading.Tasks;
     public class SeedDb

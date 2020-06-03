@@ -1,14 +1,18 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Personas 
 {
     using Entity;
+    using Microsoft.AspNetCore.Mvc;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     public class App_Persona : IEntity
     {
         public int Id { get; set; }
         [Required]
+        [HiddenInput(DisplayValue = false)]
         public int Persona_Id { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int TipoPersona_Id { get; set; }
         [MaxLength(50)]
         [Required]
@@ -75,8 +79,8 @@
 
         //Relaciones
         public App_User User { get; set; }
-        /*public ICollection<App_Alumno> Alumno { get; set; }
-        public ICollection<App_Tutor> Tutor { get; set; }
-        public ICollection<App_Docente> Docente { get; set; }*/
+        public string FullName { get { return $"{this.Apellido_Paterno} {this.Apellido_Materno} {Nombres}"; } }
+
+
     }
 }

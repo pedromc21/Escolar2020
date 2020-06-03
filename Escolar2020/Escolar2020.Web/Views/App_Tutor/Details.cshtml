@@ -1,19 +1,19 @@
 ﻿@model Escolar2020.Web.Models.App_TutorViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h2>Details</h2>
+<h2>Detalle</h2>
 
 <div>
-    <h4>App_Tutor</h4>
+    <h4>Tutor:</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        <dt hidden="hidden">
             @Html.DisplayNameFor(model => model.Persona_Id)
         </dt>
-        <dd>
+        <dd hidden="hidden">
             @Html.DisplayFor(model => model.Persona_Id)
         </dd>
         <dt>
@@ -21,6 +21,12 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Clave_Familia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreTutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreTutor)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Parentesco)
@@ -34,6 +40,38 @@
         <dd>
             @Html.DisplayFor(model => model.Profesion)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Nacimiento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Nacimiento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SexoTutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SexoTutor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefonoTutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TelefonoTutor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CelularTutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CelularTutor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EMailTutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EMailTutor)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Nombre_Empresa)
         </dt>
@@ -53,8 +91,15 @@
             @Html.DisplayFor(model => model.Telefono_Trabajo)
         </dd>
     </dl>
+    <dl>
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.ImageUrlTutor))
+            {
+                <img src="@Url.Content(Model.ImageUrlTutor)" alt="Image" style="width:200px;height:300px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+    </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Persona_Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-xs">Regresar</a>
 </div>

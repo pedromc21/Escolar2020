@@ -11,5 +11,12 @@
         [Display(Name = "Clave_Familia")]
         public string Clave_Familia { get; set; }
 
+        [Required]
+        [Display(Name = "Usuario")]
+        public string Usuario { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
+        public string NombreUsuario { get; set; }
     }
 }

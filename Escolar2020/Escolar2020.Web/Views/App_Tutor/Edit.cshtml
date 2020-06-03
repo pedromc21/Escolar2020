@@ -13,7 +13,7 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Persona_Id" />
-            <div class="form-group">
+            <div class="form-group" hidden="hidden">
                 <label asp-for="Persona_Id" class="control-label"></label>
                 <input asp-for="Persona_Id" class="form-control" />
                 <span asp-validation-for="Persona_Id" class="text-danger"></span>
@@ -22,6 +22,11 @@
                 <label asp-for="Clave_Familia" class="control-label"></label>
                 <input asp-for="Clave_Familia" class="form-control" />
                 <span asp-validation-for="Clave_Familia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreTutor" class="control-label"></label>
+                <input asp-for="NombreTutor" class="form-control" />
+                <span asp-validation-for="NombreTutor" class="text-danger" readonly="@(true)"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Parentesco" class="control-label"></label>
