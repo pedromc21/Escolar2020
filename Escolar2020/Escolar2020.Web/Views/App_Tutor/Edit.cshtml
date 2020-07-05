@@ -20,18 +20,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Clave_Familia" class="control-label"></label>
-                <input asp-for="Clave_Familia" class="form-control" />
+                <input asp-for="Clave_Familia" class="form-control" readonly="@(true)" />
                 <span asp-validation-for="Clave_Familia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NombreTutor" class="control-label"></label>
-                <input asp-for="NombreTutor" class="form-control" />
-                <span asp-validation-for="NombreTutor" class="text-danger" readonly="@(true)"></span>
+                <input asp-for="NombreTutor" class="form-control" readonly="@(true)" />
+                <span asp-validation-for="NombreTutor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Parentesco" class="control-label"></label>
-                <input asp-for="Parentesco" class="form-control" />
+                <input asp-for="Parentesco" class="form-control" readonly="@(true)" />
                 <span asp-validation-for="Parentesco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha_Nacimiento" class="control-label"></label>
+                <input asp-for="Fecha_Nacimiento" class="form-control" readonly="@(true)" />
+                <span asp-validation-for="Fecha_Nacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Profesion" class="control-label"></label>
@@ -54,8 +59,13 @@
                 <span asp-validation-for="Telefono_Trabajo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
-                <a asp-action="Index">Back to List</a>
+                <a asp-action="Index" class="btn btn-success">Regresar</a>
             </div>
         </form>
     </div>

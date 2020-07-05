@@ -14,11 +14,13 @@
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;
+        private readonly IPersonaRepository personaRepository;
         private readonly IUserHelper userHelper;
 
-        public App_TutorController(ITutorRepository tutorRepository, IUserHelper userHelper)
+        public App_TutorController(ITutorRepository tutorRepository, IPersonaRepository personaRepository, IUserHelper userHelper)
         {
             this.tutorRepository = tutorRepository;
+            this.personaRepository = personaRepository;
             this.userHelper = userHelper;
         }
         [Authorize]
@@ -93,7 +95,7 @@
                 try
                 {
                     var path = view.ImageUrl;
-                    /*if (view.ImageFile != null && view.ImageFile.Length > 0)
+                    if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
                         var guid = Guid.NewGuid().ToString();
                         var file = $"{guid}.jpg";
@@ -106,9 +108,10 @@
                         }
                         path = $"~/images/Tutors/{file}";
                     }
-                    view.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);*/
-                    var app_Tutor = this.Toapp_Tutor(view, path); //
+                    var app_Tutor = this.Toapp_Tutor(view);
                     await this.tutorRepository.UpdateAsync(app_Tutor);
+                    var app_persona = this.Toapp_Persona(view, path);
+                    await this.personaRepository.UpdateAsync(app_persona);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -132,17 +135,14 @@
                 //ImageUrl=path,
                 Persona_Id = app_Tutor.Persona_Id,
                 Clave_Familia = app_Tutor.Clave_Familia,
-                /*Apellido_Paterno = app_Tutor.Apellido_Paterno,
-                Apellido_Materno = app_Tutor.Apellido_Materno,
-                Nombres = app_Tutor.Nombres,*/
                 Parentesco = app_Tutor.Parentesco,
-                /*Fecha_Nacimiento = app_Tutor.Fecha_Nacimiento,
-                Sexo = app_Tutor.Sexo,*/
                 Profesion = app_Tutor.Profesion,
                 Nombre_Empresa = app_Tutor.Nombre_Empresa,
                 Puesto_Empresa = app_Tutor.Puesto_Empresa,
                 Telefono_Trabajo = app_Tutor.Telefono_Trabajo,
-                /*Telefono = app_Tutor.Telefono,
+                /*Fecha_Nacimiento = app_Tutor.Fecha_Nacimiento,
+               Sexo = app_Tutor.Sexo,
+                Telefono = app_Tutor.Telefono,
                 Celular = app_Tutor.Celular,
                 EMail = app_Tutor.EMail,
                 Usuario = app_Tutor.Usuario,
@@ -153,11 +153,10 @@
                 User = app_Tutor.User */
             };
         }
-        private App_Tutor Toapp_Tutor(App_TutorViewModel view, string path)
+        private App_Tutor Toapp_Tutor(App_TutorViewModel view)
         {
             return new App_Tutor
             {
-                //ImageUrl_tmp = path,
                 Persona_Id = view.Persona_Id,
                 Clave_Familia = view.Clave_Familia,
                 Parentesco = view.Parentesco,
@@ -165,6 +164,14 @@
                 Nombre_Empresa = view.Nombre_Empresa,
                 Puesto_Empresa = view.Puesto_Empresa,
                 Telefono_Trabajo = view.Telefono_Trabajo,
+            };
+        }
+        private App_Persona Toapp_Persona(App_TutorViewModel view, string path)
+        {
+            return new App_Persona
+            {
+                ImageUrl = path
+                
             };
         }
     }

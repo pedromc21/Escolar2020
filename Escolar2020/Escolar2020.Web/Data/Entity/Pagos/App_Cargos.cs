@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    public class App_Cargos
+    public class App_Cargo
     {
         [Required]
         public int LaveRef_Id { get; set; }

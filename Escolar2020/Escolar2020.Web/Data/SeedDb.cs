@@ -1,12 +1,6 @@
 ﻿
 namespace Escolar2020.Web.Data
 {
-    using Entity;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.SqlClient;
     using Entity.Personas;
     using Helpers;
     using Microsoft.AspNetCore.Identity;
@@ -32,7 +26,7 @@ namespace Escolar2020.Web.Data
             await this.userHelper.CheckRoleAsync("Tutor");
             await this.userHelper.CheckRoleAsync("Docente");
             // Add user
-            var personaList = context.App_Persona.Where(s => s.PWd_App == "123456").ToList();
+            var personaList = context.App_Personas.Where(s => s.PWd_App == "123456").ToList();
             foreach (var personaItem in personaList)
             {
                 var user = await this.userHelper.GetUserByLoginAsync(personaItem.Usuario_App);

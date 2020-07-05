@@ -9,7 +9,7 @@ namespace Escolar2020.Web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "App_Alumno_Calificacion",
+                name: "App_Alumno_Calificaciones",
                 columns: table => new
                 {
                     Curso_Id = table.Column<int>(nullable: false),
@@ -23,11 +23,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Alumno_Calificacion", x => new { x.Curso_Id, x.Persona_Id, x.Ciclo_Id, x.Num_Periodo });
+                    table.PrimaryKey("PK_App_Alumno_Calificaciones", x => new { x.Curso_Id, x.Persona_Id, x.Ciclo_Id, x.Num_Periodo });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Alumno_Grado",
+                name: "App_Alumno_Grados",
                 columns: table => new
                 {
                     Ciclo_Id = table.Column<int>(nullable: false),
@@ -40,7 +40,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Alumno_Grado", x => new { x.Ciclo_Id, x.Persona_Id, x.Grupo_Id });
+                    table.PrimaryKey("PK_App_Alumno_Grados", x => new { x.Ciclo_Id, x.Persona_Id, x.Grupo_Id });
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +60,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_c_CicloEsc",
+                name: "App_c_CicloEscolares",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -70,7 +70,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_c_CicloEsc", x => x.Id);
+                    table.PrimaryKey("PK_App_c_CicloEscolares", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,7 +196,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_c_Status",
+                name: "App_c_Statuss",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -207,7 +207,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_c_Status", x => x.Id);
+                    table.PrimaryKey("PK_App_c_Statuss", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,7 +249,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Cursos_Asistencia",
+                name: "App_Cursos_Asistencias",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -261,11 +261,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Cursos_Asistencia", x => x.Curso_Id);
+                    table.PrimaryKey("PK_App_Cursos_Asistencias", x => x.Curso_Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Cursos_Asistencia_Det",
+                name: "App_Cursos_Asistencias_Det",
                 columns: table => new
                 {
                     Asistencia_Id = table.Column<int>(nullable: false),
@@ -276,11 +276,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Cursos_Asistencia_Det", x => new { x.Asistencia_Id, x.Persona_Id });
+                    table.PrimaryKey("PK_App_Cursos_Asistencias_Det", x => new { x.Asistencia_Id, x.Persona_Id });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Cursos_Hora",
+                name: "App_Cursos_Horas",
                 columns: table => new
                 {
                     Curso_Id = table.Column<int>(nullable: false),
@@ -293,7 +293,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Cursos_Hora", x => new { x.Curso_Id, x.Dia, x.Turno, x.Orden });
+                    table.PrimaryKey("PK_App_Cursos_Horas", x => new { x.Curso_Id, x.Dia, x.Turno, x.Orden });
                 });
 
             migrationBuilder.CreateTable(
@@ -313,21 +313,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Docente",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Persona_Id = table.Column<int>(nullable: false),
-                    Clave = table.Column<string>(maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_App_Docente", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "App_Docente_Califica",
+                name: "App_Docente_Calificaciones",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -345,11 +331,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Docente_Califica", x => new { x.Id, x.Persona_Id, x.Plantel_Id, x.Grupo_Id, x.Curso_Id });
+                    table.PrimaryKey("PK_App_Docente_Calificaciones", x => new { x.Id, x.Persona_Id, x.Plantel_Id, x.Grupo_Id, x.Curso_Id });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Docente_Califica_Det",
+                name: "App_Docente_Calificaciones_Det",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -360,11 +346,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Docente_Califica_Det", x => new { x.Id, x.Persona_Id });
+                    table.PrimaryKey("PK_App_Docente_Calificaciones_Det", x => new { x.Id, x.Persona_Id });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Docente_Grupo",
+                name: "App_Docente_Grupos",
                 columns: table => new
                 {
                     Grupo_Id = table.Column<int>(nullable: false),
@@ -373,11 +359,25 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Docente_Grupo", x => new { x.Grupo_Id, x.Persona_Id, x.Ciclo_Id });
+                    table.PrimaryKey("PK_App_Docente_Grupos", x => new { x.Grupo_Id, x.Persona_Id, x.Ciclo_Id });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_Data",
+                name: "App_Docentes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Persona_Id = table.Column<int>(nullable: false),
+                    Clave = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_App_Docentes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "App_Notifications_Data",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -398,11 +398,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_Data", x => x.Id);
+                    table.PrimaryKey("PK_App_Notifications_Data", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_HomeWork",
+                name: "App_Notifications_HomeWork",
                 columns: table => new
                 {
                     Id_HomeWork = table.Column<int>(nullable: false),
@@ -412,11 +412,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_HomeWork", x => new { x.Id_HomeWork, x.Id_Data, x.Id_Respond });
+                    table.PrimaryKey("PK_App_Notifications_HomeWork", x => new { x.Id_HomeWork, x.Id_Data, x.Id_Respond });
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_HomeWork_Evaluation",
+                name: "App_Notifications_HomeWork_Evaluation",
                 columns: table => new
                 {
                     Id_HomeWork = table.Column<int>(nullable: false)
@@ -428,11 +428,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_HomeWork_Evaluation", x => x.Id_HomeWork);
+                    table.PrimaryKey("PK_App_Notifications_HomeWork_Evaluation", x => x.Id_HomeWork);
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_Recipient",
+                name: "App_Notifications_Recipient",
                 columns: table => new
                 {
                     Notification_Data_Id = table.Column<int>(nullable: false)
@@ -444,11 +444,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_Recipient", x => x.Notification_Data_Id);
+                    table.PrimaryKey("PK_App_Notifications_Recipient", x => x.Notification_Data_Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_Respond",
+                name: "App_Notifications_Respond",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -462,11 +462,11 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_Respond", x => x.Id);
+                    table.PrimaryKey("PK_App_Notifications_Respond", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Notification_Send",
+                name: "App_Notifications_Send",
                 columns: table => new
                 {
                     Notification_Data_Id = table.Column<int>(nullable: false)
@@ -476,7 +476,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Notification_Send", x => x.Notification_Data_Id);
+                    table.PrimaryKey("PK_App_Notifications_Send", x => x.Notification_Data_Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -503,7 +503,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Persona_Direccion",
+                name: "App_Persona_Direcciones",
                 columns: table => new
                 {
                     Direccion_Id = table.Column<int>(nullable: false),
@@ -511,7 +511,7 @@ namespace Escolar2020.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Persona_Direccion", x => new { x.Direccion_Id, x.Persona_Id });
+                    table.PrimaryKey("PK_App_Persona_Direcciones", x => new { x.Direccion_Id, x.Persona_Id });
                 });
 
             migrationBuilder.CreateTable(
@@ -597,7 +597,7 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "App_Persona",
+                name: "App_Personas",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -617,13 +617,20 @@ namespace Escolar2020.Web.Migrations
                     Usuario_App = table.Column<string>(maxLength: 150, nullable: true),
                     PWd_App = table.Column<string>(maxLength: 50, nullable: true),
                     ImageUrl = table.Column<string>(maxLength: 250, nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    App_TutorId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_App_Persona", x => x.Id);
+                    table.PrimaryKey("PK_App_Personas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_App_Persona_AspNetUsers_UserId",
+                        name: "FK_App_Personas_App_Tutors_App_TutorId",
+                        column: x => x.App_TutorId,
+                        principalTable: "App_Tutors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_App_Personas_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -716,8 +723,13 @@ namespace Escolar2020.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_App_Persona_UserId",
-                table: "App_Persona",
+                name: "IX_App_Personas_App_TutorId",
+                table: "App_Personas",
+                column: "App_TutorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_App_Personas_UserId",
+                table: "App_Personas",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -763,16 +775,16 @@ namespace Escolar2020.Web.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "App_Alumno_Calificacion");
+                name: "App_Alumno_Calificaciones");
 
             migrationBuilder.DropTable(
-                name: "App_Alumno_Grado");
+                name: "App_Alumno_Grados");
 
             migrationBuilder.DropTable(
                 name: "App_Alumnos");
 
             migrationBuilder.DropTable(
-                name: "App_c_CicloEsc");
+                name: "App_c_CicloEscolares");
 
             migrationBuilder.DropTable(
                 name: "App_c_Conceptos");
@@ -796,7 +808,7 @@ namespace Escolar2020.Web.Migrations
                 name: "App_c_Secciones");
 
             migrationBuilder.DropTable(
-                name: "App_c_Status");
+                name: "App_c_Statuss");
 
             migrationBuilder.DropTable(
                 name: "App_Cargos");
@@ -805,58 +817,55 @@ namespace Escolar2020.Web.Migrations
                 name: "App_Cursos");
 
             migrationBuilder.DropTable(
-                name: "App_Cursos_Asistencia");
+                name: "App_Cursos_Asistencias");
 
             migrationBuilder.DropTable(
-                name: "App_Cursos_Asistencia_Det");
+                name: "App_Cursos_Asistencias_Det");
 
             migrationBuilder.DropTable(
-                name: "App_Cursos_Hora");
+                name: "App_Cursos_Horas");
 
             migrationBuilder.DropTable(
                 name: "App_DatosFacturacion");
 
             migrationBuilder.DropTable(
-                name: "App_Docente");
+                name: "App_Docente_Calificaciones");
 
             migrationBuilder.DropTable(
-                name: "App_Docente_Califica");
+                name: "App_Docente_Calificaciones_Det");
 
             migrationBuilder.DropTable(
-                name: "App_Docente_Califica_Det");
+                name: "App_Docente_Grupos");
 
             migrationBuilder.DropTable(
-                name: "App_Docente_Grupo");
+                name: "App_Docentes");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_Data");
+                name: "App_Notifications_Data");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_HomeWork");
+                name: "App_Notifications_HomeWork");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_HomeWork_Evaluation");
+                name: "App_Notifications_HomeWork_Evaluation");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_Recipient");
+                name: "App_Notifications_Recipient");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_Respond");
+                name: "App_Notifications_Respond");
 
             migrationBuilder.DropTable(
-                name: "App_Notification_Send");
+                name: "App_Notifications_Send");
 
             migrationBuilder.DropTable(
                 name: "App_Pagos");
 
             migrationBuilder.DropTable(
-                name: "App_Persona");
+                name: "App_Persona_Direcciones");
 
             migrationBuilder.DropTable(
-                name: "App_Persona_Direccion");
-
-            migrationBuilder.DropTable(
-                name: "App_Tutors");
+                name: "App_Personas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -872,6 +881,9 @@ namespace Escolar2020.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "App_Tutors");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

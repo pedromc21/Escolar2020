@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    public class App_c_Grados : IEntity
+    public class App_c_Grado : IEntity
     {
         public int Id { get; set; }
         public int Grado_Id { get; set; }

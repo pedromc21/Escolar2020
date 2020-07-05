@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class App_Pagos
+    public class App_Pago
     {
         [Required]
         public int LaveRef_Id { get; set; }

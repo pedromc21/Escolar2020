@@ -2,7 +2,7 @@
 namespace Escolar2020.Web.Data.Entity.Pagos
 {
     using System.ComponentModel.DataAnnotations;
-    public class App_DatosFacturacion
+    public class App_DatoFacturacion
     {
         [Required]
         public int TipoFac_Id { get; set; }

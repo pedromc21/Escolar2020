@@ -1,7 +1,7 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Catalogos
 {
     using System.ComponentModel.DataAnnotations;
-    public class App_c_Planteles : IEntity
+    public class App_c_Plantel : IEntity
     {
         public int Id { get; set; }
         public int Plantel_Id { get; set; }

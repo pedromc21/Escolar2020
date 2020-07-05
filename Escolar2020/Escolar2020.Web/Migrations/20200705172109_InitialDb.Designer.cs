@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Escolar2020.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200601181901_Person")]
-    partial class Person
+    [Migration("20200705172109_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_c_CicloEsc");
+                    b.ToTable("App_c_CicloEscolares");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Conceptos", b =>
@@ -53,7 +53,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Conceptos");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Direcciones", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Direccion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +96,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Direcciones");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Grados", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Grado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Grados");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Grupos", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Grupo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,7 +136,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Grupos");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Meses", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Mes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -155,7 +155,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Meses");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Planteles", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Plantel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -172,7 +172,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_c_Planteles");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Secciones", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Catalogos.App_c_Seccion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -203,10 +203,10 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_c_Status");
+                    b.ToTable("App_c_Statuss");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Cursos.App_Cursos", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Cursos.App_Curso", b =>
                 {
                     b.Property<int>("Curso_Id");
 
@@ -247,7 +247,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Curso_Id");
 
-                    b.ToTable("App_Cursos_Asistencia");
+                    b.ToTable("App_Cursos_Asistencias");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Cursos.App_Cursos_Asistencia_Det", b =>
@@ -264,7 +264,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Asistencia_Id", "Persona_Id");
 
-                    b.ToTable("App_Cursos_Asistencia_Det");
+                    b.ToTable("App_Cursos_Asistencias_Det");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Cursos.App_Cursos_Hora", b =>
@@ -286,7 +286,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Curso_Id", "Dia", "Turno", "Orden");
 
-                    b.ToTable("App_Cursos_Hora");
+                    b.ToTable("App_Cursos_Horas");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_Data", b =>
@@ -329,7 +329,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_Notification_Data");
+                    b.ToTable("App_Notifications_Data");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_HomeWork", b =>
@@ -344,7 +344,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id_HomeWork", "Id_Data", "Id_Respond");
 
-                    b.ToTable("App_Notification_HomeWork");
+                    b.ToTable("App_Notifications_HomeWork");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_HomeWork_Evaluation", b =>
@@ -364,7 +364,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id_HomeWork");
 
-                    b.ToTable("App_Notification_HomeWork_Evaluation");
+                    b.ToTable("App_Notifications_HomeWork_Evaluation");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_Recipient", b =>
@@ -383,7 +383,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Notification_Data_Id");
 
-                    b.ToTable("App_Notification_Recipient");
+                    b.ToTable("App_Notifications_Recipient");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_Respond", b =>
@@ -406,7 +406,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_Notification_Respond");
+                    b.ToTable("App_Notifications_Respond");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Notification.App_Notification_Send", b =>
@@ -421,10 +421,10 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Notification_Data_Id");
 
-                    b.ToTable("App_Notification_Send");
+                    b.ToTable("App_Notifications_Send");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_Cargos", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_Cargo", b =>
                 {
                     b.Property<int>("LaveRef_Id");
 
@@ -458,7 +458,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_Cargos");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_DatosFacturacion", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_DatoFacturacion", b =>
                 {
                     b.Property<int>("TipoFac_Id");
 
@@ -483,7 +483,7 @@ namespace Escolar2020.Web.Migrations
                     b.ToTable("App_DatosFacturacion");
                 });
 
-            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_Pagos", b =>
+            modelBuilder.Entity("Escolar2020.Web.Data.Entity.Pagos.App_Pago", b =>
                 {
                     b.Property<int>("LaveRef_Id");
 
@@ -576,7 +576,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Curso_Id", "Persona_Id", "Ciclo_Id", "Num_Periodo");
 
-                    b.ToTable("App_Alumno_Calificacion");
+                    b.ToTable("App_Alumno_Calificaciones");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Alumno_Grado", b =>
@@ -597,7 +597,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Ciclo_Id", "Persona_Id", "Grupo_Id");
 
-                    b.ToTable("App_Alumno_Grado");
+                    b.ToTable("App_Alumno_Grados");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Docente", b =>
@@ -613,7 +613,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("App_Docente");
+                    b.ToTable("App_Docentes");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Docente_Califica", b =>
@@ -648,7 +648,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id", "Persona_Id", "Plantel_Id", "Grupo_Id", "Curso_Id");
 
-                    b.ToTable("App_Docente_Califica");
+                    b.ToTable("App_Docente_Calificaciones");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Docente_Califica_Det", b =>
@@ -666,7 +666,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Id", "Persona_Id");
 
-                    b.ToTable("App_Docente_Califica_Det");
+                    b.ToTable("App_Docente_Calificaciones_Det");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Docente_Grupo", b =>
@@ -679,7 +679,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Grupo_Id", "Persona_Id", "Ciclo_Id");
 
-                    b.ToTable("App_Docente_Grupo");
+                    b.ToTable("App_Docente_Grupos");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Persona", b =>
@@ -743,7 +743,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("App_Persona");
+                    b.ToTable("App_Personas");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Persona_Direccion", b =>
@@ -754,7 +754,7 @@ namespace Escolar2020.Web.Migrations
 
                     b.HasKey("Direccion_Id", "Persona_Id");
 
-                    b.ToTable("App_Persona_Direccion");
+                    b.ToTable("App_Persona_Direcciones");
                 });
 
             modelBuilder.Entity("Escolar2020.Web.Data.Entity.Personas.App_Tutor", b =>

@@ -1,7 +1,7 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Cursos
 {
     using System.ComponentModel.DataAnnotations;
-    public class App_Cursos
+    public class App_Curso
     {
         [Required]
         public int Curso_Id { get; set; }

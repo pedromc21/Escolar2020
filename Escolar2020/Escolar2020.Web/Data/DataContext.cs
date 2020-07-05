@@ -12,45 +12,45 @@
     public class DataContext : IdentityDbContext<App_User>
     {
         //Incluir todos los modelos que se van a convertir en tablas en la DB
-        public DbSet<App_c_CicloEsc> App_c_CicloEsc { get; set; }
+        public DbSet<App_c_CicloEsc> App_c_CicloEscolares { get; set; }
         public DbSet<App_c_Conceptos> App_c_Conceptos { get; set; }
-        public DbSet<App_c_Direcciones> App_c_Direcciones { get; set; }
-        public DbSet<App_c_Grados> App_c_Grados { get; set; }
-        public DbSet<App_c_Grupos> App_c_Grupos { get; set; }
-        public DbSet<App_c_Meses> App_c_Meses { get; set; }
-        public DbSet<App_c_Planteles> App_c_Planteles { get; set; }
-        public DbSet<App_c_Secciones> App_c_Secciones { get; set; }
-        public DbSet<App_c_Status> App_c_Status { get; set; }
+        public DbSet<App_c_Direccion> App_c_Direcciones { get; set; }
+        public DbSet<App_c_Grado> App_c_Grados { get; set; }
+        public DbSet<App_c_Grupo> App_c_Grupos { get; set; }
+        public DbSet<App_c_Mes> App_c_Meses { get; set; }
+        public DbSet<App_c_Plantel> App_c_Planteles { get; set; }
+        public DbSet<App_c_Seccion> App_c_Secciones { get; set; }
+        public DbSet<App_c_Status> App_c_Statuss { get; set; }
 
-        public DbSet<App_Persona> App_Persona { get; set; }
-        public DbSet<App_Persona_Direccion> App_Persona_Direccion { get; set; }
+        public DbSet<App_Persona> App_Personas { get; set; }
+        public DbSet<App_Persona_Direccion> App_Persona_Direcciones { get; set; }
 
         public DbSet<App_Alumno> App_Alumnos { get; set; }
-        public DbSet<App_Alumno_Calificacion> App_Alumno_Calificacion { get; set; }
-        public DbSet<App_Alumno_Grado> App_Alumno_Grado { get; set; }
+        public DbSet<App_Alumno_Calificacion> App_Alumno_Calificaciones { get; set; }
+        public DbSet<App_Alumno_Grado> App_Alumno_Grados { get; set; }
 
         public DbSet<App_Tutor> App_Tutors { get; set; }
         
-        public DbSet<App_Docente> App_Docente { get; set; }
-        public DbSet<App_Docente_Califica> App_Docente_Califica { get; set; }
-        public DbSet<App_Docente_Califica_Det> App_Docente_Califica_Det { get; set; }
-        public DbSet<App_Docente_Grupo> App_Docente_Grupo { get; set; }
+        public DbSet<App_Docente> App_Docentes { get; set; }
+        public DbSet<App_Docente_Califica> App_Docente_Calificaciones { get; set; }
+        public DbSet<App_Docente_Califica_Det> App_Docente_Calificaciones_Det { get; set; }
+        public DbSet<App_Docente_Grupo> App_Docente_Grupos { get; set; }
 
-        public DbSet<App_Cursos> App_Cursos { get; set; }
-        public DbSet<App_Cursos_Asistencia> App_Cursos_Asistencia { get; set; }
-        public DbSet<App_Cursos_Asistencia_Det> App_Cursos_Asistencia_Det { get; set; }
-        public DbSet<App_Cursos_Hora> App_Cursos_Hora { get; set; }
+        public DbSet<App_Curso> App_Cursos { get; set; }
+        public DbSet<App_Cursos_Asistencia> App_Cursos_Asistencias { get; set; }
+        public DbSet<App_Cursos_Asistencia_Det> App_Cursos_Asistencias_Det { get; set; }
+        public DbSet<App_Cursos_Hora> App_Cursos_Horas { get; set; }
 
-        public DbSet<App_Cargos> App_Cargos { get; set; }
-        public DbSet<App_DatosFacturacion> App_DatosFacturacion { get; set; }
-        public DbSet<App_Pagos> App_Pagos { get; set; }
+        public DbSet<App_Cargo> App_Cargos { get; set; }
+        public DbSet<App_DatoFacturacion> App_DatosFacturacion { get; set; }
+        public DbSet<App_Pago> App_Pagos { get; set; }
 
-        public DbSet<App_Notification_Data> App_Notification_Data { get; set; }
-        public DbSet<App_Notification_HomeWork> App_Notification_HomeWork { get; set; }
-        public DbSet<App_Notification_HomeWork_Evaluation> App_Notification_HomeWork_Evaluation { get; set; }
-        public DbSet<App_Notification_Recipient> App_Notification_Recipient { get; set; }
-        public DbSet<App_Notification_Respond> App_Notification_Respond { get; set; }
-        public DbSet<App_Notification_Send> App_Notification_Send { get; set; }
+        public DbSet<App_Notification_Data> App_Notifications_Data { get; set; }
+        public DbSet<App_Notification_HomeWork> App_Notifications_HomeWork { get; set; }
+        public DbSet<App_Notification_HomeWork_Evaluation> App_Notifications_HomeWork_Evaluation { get; set; }
+        public DbSet<App_Notification_Recipient> App_Notifications_Recipient { get; set; }
+        public DbSet<App_Notification_Respond> App_Notifications_Respond { get; set; }
+        public DbSet<App_Notification_Send> App_Notifications_Send { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -76,16 +76,16 @@
             modelBuilder.Entity<App_Persona_Direccion>()
            .HasKey(c => new { c.Direccion_Id, c.Persona_Id });
 
-            modelBuilder.Entity<App_Cargos>()
+            modelBuilder.Entity<App_Cargo>()
            .HasKey(c => new { c.LaveRef_Id, c.Persona_Id, c.Plantel_Id, c.Concepto_Id, c.Mes_Id });
 
-            modelBuilder.Entity<App_Pagos>()
+            modelBuilder.Entity<App_Pago>()
            .HasKey(c => new { c.LaveRef_Id, c.Folio, c.Factura, c.Renglon });
 
-            modelBuilder.Entity<App_DatosFacturacion>()
+            modelBuilder.Entity<App_DatoFacturacion>()
            .HasKey(c => new { c.TipoFac_Id, c.Persona_Id });
 
-            modelBuilder.Entity<App_Cursos>()
+            modelBuilder.Entity<App_Curso>()
             .HasKey(c => new { c.Curso_Id, c.Persona_Id, c.Plantel_Id, c.Grupo_Id, c.Ciclo_Id });
 
             modelBuilder.Entity<App_Cursos_Hora>()
