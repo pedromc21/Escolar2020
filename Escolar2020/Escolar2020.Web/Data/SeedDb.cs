@@ -26,7 +26,8 @@ namespace Escolar2020.Web.Data
             await this.userHelper.CheckRoleAsync("Tutor");
             await this.userHelper.CheckRoleAsync("Docente");
             // Add user
-            var personaList = context.App_Personas.Where(s => s.PWd_App == "123456").ToList();
+            //Take = Top
+            var personaList = context.App_Personas.Where(s => s.PWd_App == "123456").Take(10).ToList();
             foreach (var personaItem in personaList)
             {
                 var user = await this.userHelper.GetUserByLoginAsync(personaItem.Usuario_App);

@@ -13,6 +13,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
+    using System;
     using System.Text;
 
     public class Startup
@@ -27,6 +28,16 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            /*services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.CookieName = ".My.Session";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });*/
+
             services.AddIdentity<App_User, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = false; //true
@@ -59,6 +70,8 @@
             services.AddTransient<SeedDb>();
             //La Inyeccion Queda viva
             services.AddScoped<ITutorRepository, TutorRepository>();
+            services.AddScoped<IPersonaRepository, PersonaRepository>();
+            services.AddScoped<IAlumnoRepository, AlumnoRepository>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -93,6 +106,8 @@
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCookiePolicy();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

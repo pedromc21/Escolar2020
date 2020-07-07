@@ -16,15 +16,14 @@
         public async Task<App_Tutor> GetPersonAsync(int id)
         {
             return await this.context.Set<App_Tutor>()
-                .Include(o => o.Personas)
+                .Include(o => o.Person)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Persona_Id == id);
-        }
-        //async Task<>
+        }        
         public IQueryable<App_Tutor> GetPersonaAsync(string clave_Familia)
         {
             return this.context.App_Tutors
-                .Include(o => o.Personas)
+                .Include(o => o.Person)
                 .Where(w => w.Clave_Familia == clave_Familia)
                 .OrderByDescending(o => o.Persona_Id);
         }

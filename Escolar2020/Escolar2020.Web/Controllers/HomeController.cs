@@ -1,6 +1,7 @@
 ﻿namespace Escolar2020.Web.Controllers
 {
     using Escolar2020.Web.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 
@@ -8,6 +9,7 @@
     {
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("IdCiclo", "21");
             return View();
         }
 
@@ -21,7 +23,7 @@
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
+            ViewBag.Message = HttpContext.Session.GetString("IdCiclo");
             return View();
         }
 

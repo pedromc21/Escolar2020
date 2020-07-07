@@ -40,14 +40,17 @@
                         @if (User.IsInRole("Tutor"))
                         {
                             <li><a asp-area="" asp-controller="App_Tutor" asp-action="Index">Tutores</a></li>
+                            <li><a asp-area="" asp-controller="App_Alumno" asp-action="Index">Hijos</a></li>
                         }
                         else if (User.IsInRole("Alumno"))
                         {
-                            <li><a asp-area="" asp-controller="App_Persona" asp-action="Index">Alumnos</a></li>
+                            <li><a asp-area="" asp-controller="App_Tutor" asp-action="Index">Tutores</a></li>
+                            <li><a asp-area="" asp-controller="App_Persona" asp-action="Index">Mi Cuenta</a></li>
                         }
                         else if (User.IsInRole("Docente"))
                         {
-                            <li><a asp-area="" asp-controller="App_Tutor" asp-action="Index">Docente</a></li>
+                            <li><a asp-area="" asp-controller="App_Persona" asp-action="Index">Mi Cuenta</a></li>
+
                         }
                         <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>

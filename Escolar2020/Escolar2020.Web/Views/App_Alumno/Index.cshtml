@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Escolar2020.Web.Data.Entity.Personas.App_Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Hijos de la Familia</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden="hidden">
+                @Html.DisplayNameFor(model => model.Persona_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clave_Familia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Matricula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMail)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden="hidden">
+                @Html.DisplayFor(modelItem => item.Persona_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clave_Familia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NIA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMail)
+            </td>
+            
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Persona_Id" class="btn btn-warning btn-sm">Detalle</a>
+                <a asp-action="Edit" asp-route-id="@item.Persona_Id" class="btn btn-info btn-sm">Editar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -94,7 +94,7 @@
             {
                 try
                 {
-                    var path = view.ImageUrl;
+                    var path = view.ImageFullPath;
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
                         var guid = Guid.NewGuid().ToString();

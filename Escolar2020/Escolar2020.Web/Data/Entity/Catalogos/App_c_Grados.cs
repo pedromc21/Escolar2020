@@ -1,6 +1,6 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Catalogos
 {
-    using System.Collections.Generic;
+    using Entity.Personas;
     using System.ComponentModel.DataAnnotations;
     public class App_c_Grado : IEntity
     {
@@ -11,6 +11,7 @@
         [Display(Name = "Grado")]
         public string Grado { get; set; }
         public int Orden { get; set; }
-                
+        public App_Alumno_Grado alumGradoGrado { get; set; }
+
     }
 }

@@ -61,8 +61,8 @@
             modelBuilder.Entity<App_Alumno_Calificacion>()
             .HasKey(c => new { c.Curso_Id, c.Persona_Id, c.Ciclo_Id, c.Num_Periodo });
 
-            modelBuilder.Entity<App_Alumno_Grado>()
-            .HasKey(c => new { c.Ciclo_Id, c.Persona_Id, c.Grupo_Id });
+            //modelBuilder.Entity<App_Alumno_Grado>()
+            //.HasKey(c => new { c.Ciclo_Id, c.Persona_Id, c.Grupo_Id });
 
             modelBuilder.Entity<App_Docente_Grupo>()
            .HasKey(c => new { c.Grupo_Id, c.Persona_Id, c.Ciclo_Id }); 

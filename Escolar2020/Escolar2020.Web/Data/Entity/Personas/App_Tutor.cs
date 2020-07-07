@@ -40,17 +40,17 @@
         //public string ImageUrl_tmp { get; set; }
 
         //Relacionar con Persona
-        public IEnumerable<App_Persona> Personas { get; set; }
-        public string Nombre { get { return Personas.First(c => c.Persona_Id == Persona_Id).FullName; } }
-        public DateTime FechaNac { get { return Personas.First(c => c.Persona_Id == Persona_Id).Fecha_Nacimiento.Value; } }
-        public string Sexo { get { return Personas.First(c => c.Persona_Id == Persona_Id).Sexo; } }
-        public string Telefono { get { return Personas.First(c => c.Persona_Id == Persona_Id).Telefono; } }
-        public string Celular { get { return Personas.First(c => c.Persona_Id == Persona_Id).Celular; } }
-        public string EMail { get { return Personas.First(c => c.Persona_Id == Persona_Id).EMail; } }
-        public string CURP { get { return Personas.First(c => c.Persona_Id == Persona_Id).CURP; } }
-        public string ImageFullPath { get { return Personas.First(c => c.Persona_Id == Persona_Id).ImageFullPath; } }
+        public IEnumerable<App_Persona> Person { get; set; }
+        public string Nombre { get { return Person.First(c => c.Persona_Id == Persona_Id).FullName; } }
+        public DateTime FechaNac { get { return Person.First(c => c.Persona_Id == Persona_Id).Fecha_Nacimiento.Value; } }
+        public string Sexo { get { return Person.First(c => c.Persona_Id == Persona_Id).Sexo; } }
+        public string Telefono { get { return Person.First(c => c.Persona_Id == Persona_Id).Telefono; } }
+        public string Celular { get { return Person.First(c => c.Persona_Id == Persona_Id).Celular; } }
+        public string EMail { get { return Person.First(c => c.Persona_Id == Persona_Id).EMail; } }
+        public string CURP { get { return Person.First(c => c.Persona_Id == Persona_Id).CURP; } }
+        public string ImageFullPath { get { return Person.First(c => c.Persona_Id == Persona_Id).ImageFullPath; } }
         [Display(Name = "Imagen")]
-        public string ImageUrl { get { return Personas.First(c => c.Persona_Id == Persona_Id).ImageUrl; } }
+        public string ImageUrl { get { return Person.First(c => c.Persona_Id == Persona_Id).ImageUrl; } }
         
     }
 }
