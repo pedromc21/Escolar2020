@@ -31,8 +31,9 @@
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Credenciales incorrectas", "Aceptar");
             }
-            //await Application.Current.MainPage.DisplayAlert("Listo", "Ok", "Aceptar");
-            MainViewModel.GetInstance().Tutors = new TutorsViewModel();   
+            //Singleton para Instanciar ViewModel en Memoria
+            MainViewModel.GetInstance().Tutors = new TutorsViewModel();
+            //LLama a la vista Inicio
             await Application.Current.MainPage.Navigation.PushAsync(new TutorsPage());
         }
     }

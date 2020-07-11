@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Escolar2020.UIForms.ViewModels
 {
     using System.Collections.Generic;

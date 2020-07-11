@@ -89,7 +89,7 @@
         public async Task<string> GetUserNameAsync(int id)
         {
             var app_Tutor = await this.tutorRepository.GetPersonAsync(id);
-            return app_Tutor.Nombre;
+            return app_Tutor.Clave_Familia; //app_Tutor.Nombre;
         }
     }
 

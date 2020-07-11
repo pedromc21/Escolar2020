@@ -1,19 +1,18 @@
-﻿
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using Escolar2020.UIForms.ViewModels;
+using Escolar2020.UIForms.Views;
+
+//[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Escolar2020.UIForms
 {
-    using Views;
-    using System;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
-    using Escolar2020.UIForms.ViewModels;
-
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
-            MainViewModel.GetInstance().Login = new LoginViewModel();  
-            this.MainPage = new NavigationPage(new LoginPage());
+            MainViewModel.GetInstance().Login = new LoginViewModel(); 
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

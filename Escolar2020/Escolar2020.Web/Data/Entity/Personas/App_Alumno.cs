@@ -1,17 +1,15 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Personas 
 {
-    using Catalogos;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-
+    
     public class App_Alumno : IEntity
     {
         public int Id { get; set; }
 
         [Required]
         public int Persona_Id { get; set; }
+
         [MaxLength(50, ErrorMessage = "El Campo {0} debe de tener {1} de longitud")]
         [Required]
         [Display(Name = "Clave Familia")]
@@ -24,22 +22,43 @@
         [MaxLength(100)]
         public string NIA { get; set; }
 
+        public int Plantel_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Plantel")]
+        public string Plantel { get; set; }
+
+        public int Ciclo_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Ciclo Escolar")]
+        public string Ciclo_Escolar { get; set; }
+
+        public int Seccion_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Seccion")]
+        public string Seccion { get; set; }
+
+        public int Grado_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Grado")]
+        public string Grado { get; set; }
+
+        public int Status_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+
         //Relacionar con Persona
-        public IEnumerable<App_Persona> Person { get; set; }
-        public string Nombre { get { return Person.First(c => c.Persona_Id == Persona_Id).FullName; } }
-        public DateTime FechaNac { get { return Person.First(c => c.Persona_Id == Persona_Id).Fecha_Nacimiento.Value; } }
-        public string Sexo { get { return Person.First(c => c.Persona_Id == Persona_Id).Sexo; } }
-        public string Telefono { get { return Person.First(c => c.Persona_Id == Persona_Id).Telefono; } }
-        public string Celular { get { return Person.First(c => c.Persona_Id == Persona_Id).Celular; } }
-        public string EMail { get { return Person.First(c => c.Persona_Id == Persona_Id).EMail; } }
-        public string CURP { get { return Person.First(c => c.Persona_Id == Persona_Id).CURP; } }
-        public string ImageFullPath { get { return Person.First(c => c.Persona_Id == Persona_Id).ImageFullPath; } }
+        public App_Persona c_Person { get; set; }
+        //Relacionar con Persona
+        public virtual string Nombre { get { return c_Person.FullName; } }
+        public virtual DateTime? FechaNac { get { return c_Person.Fecha_Nacimiento; } }
+        public virtual string Sexo { get { return c_Person.Sexo; } }
+        public virtual string Telefono { get { return c_Person.Telefono; } }
+        public virtual string Celular { get { return c_Person.Celular; } }
+        public virtual string EMail { get { return c_Person.EMail; } }
+        public virtual string CURP { get { return c_Person.CURP; } }
+        public virtual string ImageFullPath { get { return c_Person.ImageFullPath; } }
         [Display(Name = "Imagen")]
-        public string ImageUrl { get { return Person.First(c => c.Persona_Id == Persona_Id).ImageUrl; } }
-
-        public IEnumerable<App_Alumno_Grado> Alumno_Grado { get; set; }
-        //public IEnumerable<App_c_CicloEsc> Alumno_Ciclo { get; set; }
-        //public string Ciclo_Escolar { get { return Alumno_Grado.First(c => c.Persona_Id == Persona_Id).CicloEscolar; } }
-
+        public virtual string ImageUrl { get { return c_Person.ImageUrl; } }
     }
 }

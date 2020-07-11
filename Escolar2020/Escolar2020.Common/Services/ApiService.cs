@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
     public class ApiService
     {
-        public async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller)
+        public async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string parameters)
         {
             try
             {
@@ -16,7 +16,7 @@
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                var url = $"{servicePrefix}{controller}";
+                var url = $"{servicePrefix}{controller}{parameters}";
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
 

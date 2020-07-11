@@ -32,7 +32,8 @@
             var response = await this.apiService.GetListAsync<Tutor>(
                 "http://app_escolar.gissa.com.mx",
                 "/api",
-                "/App_Tutor");
+                "/App_Tutor",
+                "?clave_Familia=ABARCLAZC");
             this.IsRefreshing = false;
             if (!response.IsSuccess)
             {
@@ -44,7 +45,6 @@
             }
             var myTutors = (List<Tutor>)response.Result;
             this.Tutors = new ObservableCollection<Tutor>(myTutors);
-
         }
     }
 }

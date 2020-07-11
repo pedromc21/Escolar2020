@@ -50,7 +50,7 @@
         {
             return new App_TutorViewModel
             {
-                ImageUrlTutor= app_Tutor.ImageFullPath,
+                //ImageUrlTutor= app_Tutor.ImageFullPath,
                 Persona_Id = app_Tutor.Persona_Id,
                 Clave_Familia = app_Tutor.Clave_Familia,
                 NombreTutor = app_Tutor.Nombre,
@@ -108,10 +108,10 @@
                         }
                         path = $"~/images/Tutors/{file}";
                     }
-                    var app_Tutor = this.Toapp_Tutor(view);
+                    var app_Tutor = this.ToApp_Tutor(view);
                     await this.tutorRepository.UpdateAsync(app_Tutor);
-                    var app_persona = this.Toapp_Persona(view, path);
-                    await this.personaRepository.UpdateAsync(app_persona);
+                    //var app_persona = this.Toapp_Persona(view, path);
+                    //await this.personaRepository.UpdateAsync(app_persona);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -140,20 +140,10 @@
                 Nombre_Empresa = app_Tutor.Nombre_Empresa,
                 Puesto_Empresa = app_Tutor.Puesto_Empresa,
                 Telefono_Trabajo = app_Tutor.Telefono_Trabajo,
-                /*Fecha_Nacimiento = app_Tutor.Fecha_Nacimiento,
-               Sexo = app_Tutor.Sexo,
-                Telefono = app_Tutor.Telefono,
-                Celular = app_Tutor.Celular,
-                EMail = app_Tutor.EMail,
-                Usuario = app_Tutor.Usuario,
-                Clave = app_Tutor.Clave,
-                Email_Institucional = app_Tutor.Email_Institucional,
-                Usuario_Institucional = app_Tutor.Usuario_Institucional,
-                Clave_Institucional = app_Tutor.Clave_Institucional,
-                User = app_Tutor.User */
+                Fecha_Nacimiento = app_Tutor.FechaNac
             };
         }
-        private App_Tutor Toapp_Tutor(App_TutorViewModel view)
+        private App_Tutor ToApp_Tutor(App_TutorViewModel view)
         {
             return new App_Tutor
             {
@@ -166,7 +156,7 @@
                 Telefono_Trabajo = view.Telefono_Trabajo,
             };
         }
-        private App_Persona Toapp_Persona(App_TutorViewModel view, string path)
+        private App_Persona ToApp_Persona(App_TutorViewModel view, string path)
         {
             return new App_Persona
             {

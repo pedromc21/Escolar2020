@@ -1,6 +1,5 @@
 ﻿namespace Escolar2020.Web.Data.Entity.Personas 
 {
-    using Entity.Catalogos;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +8,9 @@
         public int Curso_Id { get; set; }
         public int Persona_Id { get; set; }
         public int Ciclo_Id { get; set; }
+        [MaxLength(10)]
+        [Display(Name = "Ciclo Escolar")]
+        public string Ciclo_Escolar { get; set; }
 
         [Display(Name = "N° Periodo")]
         public int Num_Periodo { get; set; }
@@ -18,8 +20,9 @@
         [Display(Name = "Clave Materia")]
         public string  Clave_Materia { get; set; }
 
-        [MaxLength(500, ErrorMessage = "El Campo {0} debe de tener {1} de longitud")]
-        [Required]
+        public int Materia_Id { get; set; }
+        [MaxLength(100)]
+        [Display(Name = "Materia")]
         public string Materia { get; set; }
 
         [Display(Name = "Calificación")]

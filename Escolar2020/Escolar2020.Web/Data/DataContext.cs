@@ -1,7 +1,6 @@
 ﻿namespace Escolar2020.Web.Data
 {
     using Entity.Personas;
-    using Entity.Catalogos;
     using Entity.Pagos;
     using Entity.Notification;
     using Entity.Cursos;
@@ -12,22 +11,11 @@
     public class DataContext : IdentityDbContext<App_User>
     {
         //Incluir todos los modelos que se van a convertir en tablas en la DB
-        public DbSet<App_c_CicloEsc> App_c_CicloEscolares { get; set; }
-        public DbSet<App_c_Conceptos> App_c_Conceptos { get; set; }
-        public DbSet<App_c_Direccion> App_c_Direcciones { get; set; }
-        public DbSet<App_c_Grado> App_c_Grados { get; set; }
-        public DbSet<App_c_Grupo> App_c_Grupos { get; set; }
-        public DbSet<App_c_Mes> App_c_Meses { get; set; }
-        public DbSet<App_c_Plantel> App_c_Planteles { get; set; }
-        public DbSet<App_c_Seccion> App_c_Secciones { get; set; }
-        public DbSet<App_c_Status> App_c_Statuss { get; set; }
-
         public DbSet<App_Persona> App_Personas { get; set; }
         public DbSet<App_Persona_Direccion> App_Persona_Direcciones { get; set; }
 
         public DbSet<App_Alumno> App_Alumnos { get; set; }
         public DbSet<App_Alumno_Calificacion> App_Alumno_Calificaciones { get; set; }
-        public DbSet<App_Alumno_Grado> App_Alumno_Grados { get; set; }
 
         public DbSet<App_Tutor> App_Tutors { get; set; }
         
@@ -60,9 +48,6 @@
         {
             modelBuilder.Entity<App_Alumno_Calificacion>()
             .HasKey(c => new { c.Curso_Id, c.Persona_Id, c.Ciclo_Id, c.Num_Periodo });
-
-            //modelBuilder.Entity<App_Alumno_Grado>()
-            //.HasKey(c => new { c.Ciclo_Id, c.Persona_Id, c.Grupo_Id });
 
             modelBuilder.Entity<App_Docente_Grupo>()
            .HasKey(c => new { c.Grupo_Id, c.Persona_Id, c.Ciclo_Id }); 

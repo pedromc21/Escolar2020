@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     
     [Route("api/[Controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class App_TutorController : Controller
     {
         private readonly ITutorRepository tutorRepository;
@@ -17,10 +17,10 @@
         }
         
         [HttpGet]
-        public IActionResult GetTutors()
+        public IActionResult GetTutors(string clave_Familia) 
         {
             //Regresa todos los datos del controlador Tutor, tengo que hacer que salga solo los tutores de la familia.
-            return Ok(this.tutorRepository.GetAllWithUsers());
+            return Ok(this.tutorRepository.GetPersonaAsync(clave_Familia));
             //.OrderBy(p => p.Clave_Familia)
         }
 

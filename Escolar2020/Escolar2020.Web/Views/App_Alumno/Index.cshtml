@@ -25,7 +25,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.EMail)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Ciclo_Escolar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grado)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -50,11 +58,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EMail)
             </td>
-            
             <td>
+                @Html.DisplayFor(modelItem => item.Ciclo_Escolar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grado)
+            </td>
+            @*<td>
                 <a asp-action="Details" asp-route-id="@item.Persona_Id" class="btn btn-warning btn-sm">Detalle</a>
                 <a asp-action="Edit" asp-route-id="@item.Persona_Id" class="btn btn-info btn-sm">Editar</a>
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>

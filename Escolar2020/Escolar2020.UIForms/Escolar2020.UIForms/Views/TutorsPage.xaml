@@ -20,6 +20,12 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+                                <Label
+                                    	FontAttributes="Bold"
+                                    	FontSize="Body"
+                                        Text="{Binding Parentesco}"
+                                    	TextColor="Black">
+                                </Label>
                                 <Image
                                 	Grid.Column="0"
                                 	Source="{Binding ImageFullPath}"
@@ -29,10 +35,9 @@
                                 	Grid.Column="1"
                                 	VerticalOptions="Center">
                                     <Label
-                                    	FontAttributes="Bold"
                                     	FontSize="Medium"
                                         Text="{Binding ClaveFamilia}"
-                                    	TextColor="Black">
+                                    	TextColor="CadetBlue">
                                     </Label>
                                     <Label
                                     	FontSize="Small"

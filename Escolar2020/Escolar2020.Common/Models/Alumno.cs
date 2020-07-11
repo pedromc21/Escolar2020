@@ -1,9 +1,8 @@
 ﻿namespace Escolar2020.Common.Models
 {
-    using System;
     using Newtonsoft.Json;
-
-    public partial class Tutor
+    using System;
+    public partial class Alumno
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -14,20 +13,41 @@
         [JsonProperty("clave_Familia")]
         public string ClaveFamilia { get; set; }
 
-        [JsonProperty("parentesco")]
-        public string Parentesco { get; set; }
+        [JsonProperty("matricula")]
+        public string Matricula { get; set; }
 
-        [JsonProperty("profesion")]
-        public string Profesion { get; set; }
+        [JsonProperty("nia")]
+        public string Nia { get; set; }
 
-        [JsonProperty("nombre_Empresa")]
-        public string NombreEmpresa { get; set; }
+        [JsonProperty("plantel_Id")]
+        public long PlantelId { get; set; }
 
-        [JsonProperty("puesto_Empresa")]
-        public string PuestoEmpresa { get; set; }
+        [JsonProperty("plantel")]
+        public string Plantel { get; set; }
 
-        [JsonProperty("telefono_Trabajo")]
-        public string TelefonoTrabajo { get; set; }
+        [JsonProperty("ciclo_Id")]
+        public long CicloId { get; set; }
+
+        [JsonProperty("ciclo_Escolar")]
+        public string CicloEscolar { get; set; }
+
+        [JsonProperty("seccion_Id")]
+        public long SeccionId { get; set; }
+
+        [JsonProperty("seccion")]
+        public string Seccion { get; set; }
+
+        [JsonProperty("grado_Id")]
+        public long GradoId { get; set; }
+
+        [JsonProperty("grado")]
+        public string Grado { get; set; }
+
+        [JsonProperty("status_Id")]
+        public long StatusId { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
 
         [JsonProperty("c_Person")]
         public CPerson CPerson { get; set; }
@@ -58,16 +78,5 @@
 
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }
-        public override string ToString()
-        {
-            return $"{this.ClaveFamilia} {CPerson.ApellidoPaterno} {CPerson.ApellidoMaterno} {CPerson.Nombres}"; 
-        }
-        public string Name
-        {
-            get
-            {
-                return $" {CPerson.ApellidoPaterno} {CPerson.ApellidoMaterno} {CPerson.Nombres}";
-            }
-        }
     }
 }
