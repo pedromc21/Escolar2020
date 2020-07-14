@@ -7,7 +7,7 @@ namespace Escolar2020.Web.Controllers.API
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[Controller]")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class App_AlumnoController : Controller
     {
         private readonly IAlumnoRepository alumnoRepository;

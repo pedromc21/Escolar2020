@@ -13,28 +13,31 @@
         private bool isRefreshing;
         public ObservableCollection<Tutor> Tutors
         {
-            get => this.tutors;
-            set => this.SetValue(ref this.tutors, value);
+            get => tutors;
+            set => SetValue(ref tutors, value);
         }
         public bool IsRefreshing
         {
-            get => this.isRefreshing;
-            set => this.SetValue(ref this.isRefreshing, value);
+            get => isRefreshing;
+            set => SetValue(ref isRefreshing, value);
         }
         public TutorsViewModel()
         {
-            this.apiService = new ApiService();
-            this.LoadTutorts();
+            apiService = new ApiService();
+            LoadTutorts();
         }
         private async void LoadTutorts()
         {
-            this.IsRefreshing = true; 
-            var response = await this.apiService.GetListAsync<Tutor>(
-                "http://app_escolar.gissa.com.mx",
+            IsRefreshing = true;
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await apiService.GetListAsync<Tutor>(
+                url,
                 "/api",
                 "/App_Tutor",
-                "?clave_Familia=ABARCLAZC");
-            this.IsRefreshing = false;
+                "?clave_Familia=ABARCLAZC",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
+            IsRefreshing = false;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -44,7 +47,7 @@
                 return;
             }
             var myTutors = (List<Tutor>)response.Result;
-            this.Tutors = new ObservableCollection<Tutor>(myTutors);
+            Tutors = new ObservableCollection<Tutor>(myTutors);
         }
     }
 }

@@ -3,17 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Escolar2020.UIForms.Views.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Login">
+             Title="Login" Padding="0,0,10,10">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
             <StackLayout
-                Padding="8">
-                <Label Text="Usuario:"></Label>
-                <Entry Placeholder="Escribe tu usuario" Text="{Binding Email}"></Entry>
+                Padding="8" BackgroundColor="#84B9C2">
+                <Label Text="Usuario:" Padding="0,0,0,20"></Label>
+                <Entry Placeholder="Escribe tu usuario" 
+                       Text="{Binding Email}"></Entry>
                 <Label Text="Contraseña:"></Label>
-                <Entry IsPassword="True" Placeholder="Escribe tu contraseña" Text="{Binding Pasword}"></Entry>
-                <Button Command="{Binding LoginCommand}" Text="Login"></Button>
+                <Entry IsPassword="True" 
+                       Placeholder="Escribe tu contraseña" 
+                       Text="{Binding Password}"></Entry>
+                <ActivityIndicator
+                	IsRunning="{Binding IsRunning}">
+                </ActivityIndicator>
+                <Button Command="{Binding LoginCommand}" 
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Login">
+                </Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,19 +1,19 @@
 ﻿namespace Escolar2020.Web.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Linq;
-    using System.Text;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Claims;
     using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.IdentityModel.Tokens;
     using Web.Data.Entity.Personas;
     using Web.Helpers;
     using Web.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.IdentityModel.Tokens;
-    
+
     public class AccountController : Controller
     {
         private readonly IUserHelper userHelper;
@@ -28,46 +28,46 @@
         public IActionResult Login()
         {
             //Validar que no este logueado
-            if (this.User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
-                return this.RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
-            return this.View();
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var result = await this.userHelper.LoginAsync(model);
+                var result = await userHelper.LoginAsync(model);
                 if (result.Succeeded)
                 {
-                    if (this.Request.Query.Keys.Contains("ReturnUrl"))
+                    if (Request.Query.Keys.Contains("ReturnUrl"))
                     {
-                        return this.Redirect(this.Request.Query["ReturnUrl"].First());
+                        return Redirect(Request.Query["ReturnUrl"].First());
                     }
-                    return this.RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
-            this.ModelState.AddModelError(string.Empty, "Failed to login.");
-            return this.View(model);
+            ModelState.AddModelError(string.Empty, "Error al iniciar sesión.");
+            return View(model);
         }
         public async Task<IActionResult> Logout()
         {
-            await this.userHelper.LogoutAsync();
-            return this.RedirectToAction("Index", "Home");
+            await userHelper.LogoutAsync();
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult Register()
         {
-            return this.View();
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterNewUserViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByLoginAsync(model.Username);
+                var user = await userHelper.GetUserByLoginAsync(model.Username);
                 if (user == null)
                 {
                     user = new App_User
@@ -78,11 +78,11 @@
                         UserName = model.Username
                     };
 
-                    var result = await this.userHelper.AddUserAsync(user, model.Password);
+                    var result = await userHelper.AddUserAsync(user, model.Password);
                     if (result != IdentityResult.Success)
                     {
-                        this.ModelState.AddModelError(string.Empty, "The user couldn't be created.");
-                        return this.View(model);
+                        ModelState.AddModelError(string.Empty, "El usuario no pudo ser creado.");
+                        return View(model);
                     }
                     var loginViewModel = new LoginViewModel
                     {
@@ -91,26 +91,25 @@
                         Username = model.Username
                     };
 
-                    var result2 = await this.userHelper.LoginAsync(loginViewModel);
+                    var result2 = await userHelper.LoginAsync(loginViewModel);
 
                     if (result2.Succeeded)
                     {
-                        return this.RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
                     }
 
-                    this.ModelState.AddModelError(string.Empty, "The user couldn't be login.");
-                    return this.View(model);
+                    ModelState.AddModelError(string.Empty, "El usuario no pudo iniciar sesión.");
+                    return View(model);
                 }
 
-                this.ModelState.AddModelError(string.Empty, "The username is already registered.");
+                ModelState.AddModelError(string.Empty, "El nombre de usuario ya está registrado.");
             }
-            return this.View(model);
+            return View(model);
         }
         public async Task<IActionResult> ChangeUser()
         {
-            //todo: Validar que aqui pide el Email y necesito pasar la clave familia.
-            var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
-            string NamePerson = this.userHelper.GetUserNameAsync(user.Persona_Id).Result;  //userHelper.GetUserByLoginAsync(this.User.Identity.Name);
+            var user = await userHelper.GetUserByLoginAsync(User.Identity.Name);
+            string NamePerson = userHelper.GetUserNameAsync(user.Persona_Id).Result;
             var model = new ChangeUserViewModel();
             if (user != null)
             {
@@ -119,88 +118,89 @@
                 model.Usuario = user.UserName;
                 model.NombreUsuario = NamePerson;
             }
-            return this.View(model);
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> ChangeUser(ChangeUserViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
+                var user = await userHelper.GetUserByLoginAsync(User.Identity.Name);
                 if (user != null)
                 {
                     user.Persona_Id = model.Persona_Id;
                     user.Clave_Familia = model.Clave_Familia;
-                    var respose = await this.userHelper.UpdateUserAsync(user);
+                    var respose = await userHelper.UpdateUserAsync(user);
                     if (respose.Succeeded)
                     {
-                        this.ViewBag.UserMessage = "User updated!";
+                        ViewBag.UserMessage = "Usuario actualizado!";
                     }
                     else
                     {
-                        this.ModelState.AddModelError(string.Empty, respose.Errors.FirstOrDefault().Description);
+                        ModelState.AddModelError(string.Empty, respose.Errors.FirstOrDefault().Description);
                     }
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "User no found.");
+                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                 }
             }
-            return this.View(model);
+            return View(model);
         }
         public IActionResult ChangePassword()
         {
-            return this.View();
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByLoginAsync(this.User.Identity.Name);
+                var user = await userHelper.GetUserByLoginAsync(User.Identity.Name);
                 if (user != null)
                 {
-                    var result = await this.userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    var result = await userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return this.RedirectToAction("ChangeUser");
+                        return RedirectToAction("ChangeUser");
                     }
                     else
                     {
-                        this.ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
                     }
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "User no found.");
+                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                 }
             }
 
-            return this.View(model);
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var user = await this.userHelper.GetUserByLoginAsync(model.Username);
+                var user = await userHelper.GetUserByLoginAsync(model.Username);
                 if (user != null)
                 {
-                    var result = await this.userHelper.ValidatePasswordAsync(
+                    var result = await userHelper.ValidatePasswordAsync(
                         user,
                         model.Password);
                     if (result.Succeeded)
                     {
                         var claims = new[]
                         {
-                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                            //Email
+                            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                         };
-                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration["Tokens:Key"]));
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Tokens:Key"]));
                         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                         var token = new JwtSecurityToken(
-                            this.configuration["Tokens:Issuer"],
-                            this.configuration["Tokens:Audience"],
+                            configuration["Tokens:Issuer"],
+                            configuration["Tokens:Audience"],
                             claims,
                             expires: DateTime.UtcNow.AddDays(15),
                             signingCredentials: credentials);
@@ -209,15 +209,15 @@
                             token = new JwtSecurityTokenHandler().WriteToken(token),
                             expiration = token.ValidTo
                         };
-                        return this.Created(string.Empty, results);
+                        return Created(string.Empty, results);
                     }
                 }
             }
-            return this.BadRequest();
+            return BadRequest();
         }
         public IActionResult NotAuthorized()
         {
-            return this.View();
+            return View();
         }
 
     }

@@ -6,29 +6,29 @@
     using System.Collections.ObjectModel;
     using Xamarin.Forms;
 
-    public class AlumnosViewModel :BaseViewModel
+    public class AlumnosViewModel : BaseViewModel
     {
         private readonly ApiService apiService;
         private ObservableCollection<Alumno> alumnos;
         private bool isRefreshing;
         public ObservableCollection<Alumno> Alumnos
         {
-            get => this.alumnos;
-            set => this.SetValue(ref this.alumnos, value);
+            get => alumnos;
+            set => SetValue(ref alumnos, value);
         }
         public AlumnosViewModel()
         {
-            this.apiService = new ApiService();
-            this.LoadAlumnos();
+            apiService = new ApiService();
+            LoadAlumnos();
         }
         private async void LoadAlumnos()
         {
-            var response = await this.apiService.GetListAsync<Alumno>(
+            var response = await apiService.GetListAsync<Alumno>(
                 "http://app_escolar.gissa.com.mx",
                 "/api",
                 "App_Alumno",
                 "? clave_Familia = ABARCLAZC");
-            this.isRefreshing = false;
+            isRefreshing = false;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -38,7 +38,7 @@
                 return;
             }
             var myAlumnos = (List<Alumno>)response.Result;
-            this.Alumnos = new ObservableCollection<Alumno>(myAlumnos);
+            Alumnos = new ObservableCollection<Alumno>(myAlumnos);
         }
     }
 }

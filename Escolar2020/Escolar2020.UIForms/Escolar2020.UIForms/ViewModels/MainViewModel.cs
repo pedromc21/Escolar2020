@@ -1,8 +1,10 @@
 ﻿namespace Escolar2020.UIForms.ViewModels
 {
+    using Common.Models;
     public class MainViewModel
     {
         private static MainViewModel instance;
+        public TokenResponse Token { get; set; }
         public LoginViewModel Login { get; set; }
         public TutorsViewModel Tutors { get; set; }
         public AlumnosViewModel Alumnos { get; set; }
