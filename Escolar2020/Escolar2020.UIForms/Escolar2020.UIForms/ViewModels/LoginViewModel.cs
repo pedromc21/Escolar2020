@@ -73,8 +73,7 @@
             mainViewModel.Token = token;
             //Singleton para Instanciar ViewModel en Memoria
             mainViewModel.Tutors = new TutorsViewModel();
-            //LLama a la vista Inicio
-            await Application.Current.MainPage.Navigation.PushAsync(new TutorsPage());
+            Application.Current.MainPage = new MasterPage();            
         }
     }
 }

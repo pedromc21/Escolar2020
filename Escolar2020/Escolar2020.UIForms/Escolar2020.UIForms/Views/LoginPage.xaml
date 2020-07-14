@@ -8,20 +8,38 @@
         <ScrollView
             BindingContext="{Binding Login}">
             <StackLayout
-                Padding="8" BackgroundColor="#84B9C2">
-                <Label Text="Usuario:" Padding="0,0,0,20"></Label>
+                Padding="8" BackgroundColor="WhiteSmoke">
+                <Image
+            	    HeightRequest="150"
+            	    Source="Logo_GISSA">
+                </Image>
+                <Label 
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    Text="Usuario:"></Label>
                 <Entry Placeholder="Escribe tu usuario" 
                        Text="{Binding Email}"></Entry>
-                <Label Text="Contraseña:"></Label>
+                <Label 
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    
+                    Text="Contraseña:"></Label>
                 <Entry IsPassword="True" 
                        Placeholder="Escribe tu contraseña" 
                        Text="{Binding Password}"></Entry>
                 <ActivityIndicator
-                	IsRunning="{Binding IsRunning}">
+                	IsRunning="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
-                <Button Command="{Binding LoginCommand}" 
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="Login">
+                <Button 
+                    BackgroundColor="LightSkyBlue"
+                    BorderRadius="23"
+                    Command="{Binding LoginCommand}" 
+                    FontSize="Large"
+                    HeightRequest="46"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="Login"
+                    TextColor="DarkBlue">
                 </Button>
             </StackLayout>
         </ScrollView>
