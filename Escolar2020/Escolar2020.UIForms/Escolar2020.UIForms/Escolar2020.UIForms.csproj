@@ -36,22 +36,22 @@
     <EmbeddedResource Update="Views\TutorsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\Calificaciones.xaml">
+    <EmbeddedResource Update="Views\Tutor\CalificacionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\DatosFacturacion.xaml">
+    <EmbeddedResource Update="Views\Tutor\DatosFacturacionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\DatosFamilia.xaml">
+    <EmbeddedResource Update="Views\Tutor\DatosFamiliaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\EstadoCuenta.xaml">
+    <EmbeddedResource Update="Views\Tutor\EdoCuentaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\Notificacion.xaml">
+    <EmbeddedResource Update="Views\Tutor\NotificacionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Tutor\Pagar.xaml">
+    <EmbeddedResource Update="Views\Tutor\PagarPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

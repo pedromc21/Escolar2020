@@ -65,6 +65,10 @@
     <None Include="wwwroot\node_modules\font-awesome\scss\_variables.scss" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Escolar2020.Common\Escolar2020.Common.csproj" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

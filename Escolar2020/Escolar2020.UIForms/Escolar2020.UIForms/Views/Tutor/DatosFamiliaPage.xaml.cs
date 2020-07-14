@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Escolar2020.UIForms.Views.Tutor
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Pagar : ContentPage
+    public partial class DatosFamiliaPage : ContentPage
     {
-        public Pagar()
+        public DatosFamiliaPage()
         {
             InitializeComponent();
         }

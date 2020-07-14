@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Escolar2020.UIForms.Views.Tutor
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EstadoCuenta : ContentPage
+    public partial class EdoCuentaPage : ContentPage
     {
-        public EstadoCuenta()
+        public EdoCuentaPage()
         {
             InitializeComponent();
         }

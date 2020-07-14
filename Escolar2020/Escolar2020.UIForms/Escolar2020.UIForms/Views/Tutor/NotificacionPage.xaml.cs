@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace Escolar2020.UIForms.Views.Tutor
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Calificaciones : ContentPage
+    public partial class NotificacionPage : ContentPage
     {
-        public Calificaciones()
+        public NotificacionPage()
         {
             InitializeComponent();
         }

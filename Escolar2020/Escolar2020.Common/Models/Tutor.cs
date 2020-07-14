@@ -6,10 +6,10 @@
     public partial class Tutor
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("persona_Id")]
-        public long PersonaId { get; set; }
+        public int PersonaId { get; set; }
 
         [JsonProperty("clave_Familia")]
         public string ClaveFamilia { get; set; }
