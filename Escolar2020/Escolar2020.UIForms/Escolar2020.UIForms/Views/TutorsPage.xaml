@@ -4,6 +4,9 @@
              x:Class="Escolar2020.UIForms.Views.TutorsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Tutor">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_create" Command="{Binding AddInfoCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Tutors}"
@@ -16,9 +19,13 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectTutorCommand}"/>
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     	FontAttributes="Bold"
@@ -45,6 +52,11 @@
                                     	TextColor="Black">
                                     </Label>
                                 </StackLayout>
+                                <Image
+                                	Grid.Column="2"
+                                	Source="ic_launcher"
+                                	WidthRequest="100">
+                                </Image>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

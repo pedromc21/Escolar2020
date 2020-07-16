@@ -154,4 +154,22 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_notifications.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_add_box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_create.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Logo_GISSA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Not_image.png" />
+  </ItemGroup>
 </Project>

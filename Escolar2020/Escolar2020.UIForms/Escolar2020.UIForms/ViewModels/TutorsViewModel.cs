@@ -4,14 +4,19 @@
     using Common.Services;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using Xamarin.Forms;
 
     public class TutorsViewModel : BaseViewModel
     {
         private readonly ApiService apiService;
-        private ObservableCollection<Tutor> tutors;
         private bool isRefreshing;
-        public ObservableCollection<Tutor> Tutors
+        //Una lista del Objeto Tutor (Mantiene en Momoria)
+        private List<Tutor> myTutors;
+        //Un Observable Del Item del Tutor seleccionado
+        private ObservableCollection<TutorItemViewModel> tutors;
+        //Un Propiedad el Observable Collection
+        public ObservableCollection<TutorItemViewModel> Tutors
         {
             get => tutors;
             set => SetValue(ref tutors, value);
@@ -46,8 +51,56 @@
                     "Aceptar");
                 return;
             }
-            var myTutors = (List<Tutor>)response.Result;
-            Tutors = new ObservableCollection<Tutor>(myTutors);
+            this.myTutors = (List<Tutor>)response.Result;
+            this.RefresTutorsList();
+        }
+
+        public void AddTutorToList(Tutor Tutor)
+        {
+            this.myTutors.Add(Tutor);
+            this.RefresTutorsList();
+        }
+
+        public void UpdateTutorInList(Tutor Tutor)
+        {
+            var previousTutor = this.myTutors.Where(p => p.Id == Tutor.Id).FirstOrDefault();
+            if (previousTutor != null)
+            {
+                this.myTutors.Remove(previousTutor);
+            }
+
+            this.myTutors.Add(Tutor);
+            this.RefresTutorsList();
+        }
+
+        public void DeleteTutorInList(int productId)
+        {
+            var previousTutor = this.myTutors.Where(p => p.Id == productId).FirstOrDefault();
+            if (previousTutor != null)
+            {
+                this.myTutors.Remove(previousTutor);
+            }
+
+            this.RefresTutorsList();
+        }
+
+        private void RefresTutorsList()
+        {
+            this.Tutors = new ObservableCollection<TutorItemViewModel>(myTutors.Select(p => new TutorItemViewModel
+            {
+                Id = p.Id,
+                ImageUrl = p.ImageUrl,
+                ImageFullPath = p.ImageFullPath,
+                //IsAvailabe = p.IsAvailabe,
+                //LastPurchase = p.LastPurchase,
+                //LastSale = p.LastSale,
+                PuestoEmpresa = p.PuestoEmpresa,
+                NombreEmpresa = p.NombreEmpresa,
+                Profesion = p.Profesion,
+                TelefonoTrabajo = p.TelefonoTrabajo
+            })
+            .OrderBy(p => p.Name)
+            .ToList());
         }
     }
 }

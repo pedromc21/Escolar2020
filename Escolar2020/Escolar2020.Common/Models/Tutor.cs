@@ -54,7 +54,7 @@
         public string Curp { get; set; }
 
         [JsonProperty("imageFullPath")]
-        public object ImageFullPath { get; set; }
+        public string ImageFullPath { get; set; }
 
         [JsonProperty("imageUrl")]
         public string ImageUrl { get; set; }

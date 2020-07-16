@@ -1,19 +1,26 @@
 ﻿namespace Escolar2020.UIForms.ViewModels
 {
     using Common.Models;
+    using Escolar2020.UIForms.Views.Tutor;
+    using GalaSoft.MvvmLight.Command;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Windows.Input;
 
     public class MainViewModel
     {
         private static MainViewModel instance;
         public ObservableCollection<MenuItemViewModel> Menus { get; set; }
         public TokenResponse Token { get; set; }
+        public string UserEmail { get; set; }
+        public string UserPassword { get; set; }
         public LoginViewModel Login { get; set; }
         public TutorsViewModel Tutors { get; set; }
         public AlumnosViewModel Alumnos { get; set; }
-
+        public AddInfoViewModel AddInfo { get; set; }
+        public ICommand AddInfoCommand { get { return new RelayCommand(GoAddInfo); } }
         public MainViewModel()
         {
             instance = this;
@@ -83,6 +90,10 @@
                 Title = m.Title
             }).ToList());
         }
-
+        private async void GoAddInfo()
+        {
+            AddInfo = new AddInfoViewModel();
+            await App.Navigator.PushAsync(new AddInfoTutorPage());
+        }
     }
 }

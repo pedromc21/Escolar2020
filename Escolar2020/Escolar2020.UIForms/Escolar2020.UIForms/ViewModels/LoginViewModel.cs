@@ -70,6 +70,8 @@
 
             var token = (TokenResponse)response.Result;
             var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.UserEmail = this.Email;
+            mainViewModel.UserPassword = this.Password;
             mainViewModel.Token = token;
             //Singleton para Instanciar ViewModel en Memoria
             mainViewModel.Tutors = new TutorsViewModel();
