@@ -22,11 +22,21 @@
                 <Label 
                     FontSize="Large"
                     FontAttributes="Bold"
-                    
                     Text="Contraseña:"></Label>
                 <Entry IsPassword="True" 
                        Placeholder="Escribe tu contraseña" 
                        Text="{Binding Password}"></Entry>
+                <StackLayout
+	                HorizontalOptions="Center"
+	                Orientation="Horizontal">
+                    <Label
+    	                Text="Recordarme en este dispositivo"
+    	                VerticalOptions="Center">
+                    </Label>
+                    <Switch
+    	                IsToggled="{Binding IsRemember}">
+                    </Switch>
+                </StackLayout>
                 <ActivityIndicator
                 	IsRunning="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand">

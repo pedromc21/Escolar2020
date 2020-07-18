@@ -1,9 +1,9 @@
 ﻿namespace Escolar2020.UIForms.ViewModels
 {
     using Common.Models;
+    using Escolar2020.Common.Helpers;
     using Escolar2020.UIForms.Views.Tutor;
     using GalaSoft.MvvmLight.Command;
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -21,9 +21,11 @@
         public AlumnosViewModel Alumnos { get; set; }
         public AddInfoViewModel AddInfo { get; set; }
         public ICommand AddInfoCommand { get { return new RelayCommand(GoAddInfo); } }
+        public string Usuario { get; set; }
         public MainViewModel()
         {
             instance = this;
+            Usuario = Settings.UserEmail;
             LoadMenus();
         }
         //Singleton Clasico (Es para poder referir de la ViewModel desde cualquier sito)

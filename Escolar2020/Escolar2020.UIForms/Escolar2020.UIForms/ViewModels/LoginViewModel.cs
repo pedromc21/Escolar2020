@@ -1,9 +1,11 @@
 ﻿namespace Escolar2020.UIForms.ViewModels
 {
+    using Escolar2020.Common.Helpers;
     using Escolar2020.Common.Models;
     using Escolar2020.Common.Services;
     using Escolar2020.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
+    using Newtonsoft.Json;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -12,6 +14,7 @@
         private readonly ApiService apiService;
         private bool isRunning;
         private bool isEnabled;
+        public bool IsRemember { get; set; }
         public bool IsRunning
         {
             get => isRunning;
@@ -28,9 +31,10 @@
         public LoginViewModel()
         {
             apiService = new ApiService();
-            Email = "alcantara.karla_renee@imex.edu.mx";
+            //Email = "alcantara.karla_renee@imex.edu.mx";
             //Password = "123456";
             IsEnabled = true;
+            IsRemember = true;
         }
         private async void Login()
         {
@@ -44,23 +48,23 @@
                 await Application.Current.MainPage.DisplayAlert("Error", "Escriba la contraseña", "Aceptar");
                 return;
             }
-            this.IsRunning = true;
-            this.IsEnabled = false;
+            IsRunning = true;
+            IsEnabled = false;
             var request = new TokenRequest
             {
-                Password = this.Password,
-                Username = this.Email
+                Password = Password,
+                Username = Email
             };
 
             var url = Application.Current.Resources["UrlAPI"].ToString();
-            var response = await this.apiService.GetTokenAsync(
+            var response = await apiService.GetTokenAsync(
                 url,
                 "/Account",
                 "/CreateToken",
                 request);
 
-            this.IsRunning = false;
-            this.IsEnabled = true;
+            IsRunning = false;
+            IsEnabled = true;
 
             if (!response.IsSuccess)
             {
@@ -70,12 +74,18 @@
 
             var token = (TokenResponse)response.Result;
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.UserEmail = this.Email;
-            mainViewModel.UserPassword = this.Password;
+            mainViewModel.UserEmail = Email;
+            mainViewModel.UserPassword = Password;
             mainViewModel.Token = token;
             //Singleton para Instanciar ViewModel en Memoria
             mainViewModel.Tutors = new TutorsViewModel();
-            Application.Current.MainPage = new MasterPage();            
+            //Guardar datos en persistencia
+            Settings.IsRemember = this.IsRemember;
+            Settings.UserEmail = this.Email;
+            Settings.UserPassword = this.Password;
+            Settings.Token = JsonConvert.SerializeObject(token);
+            //Llamar Matar Page que contiene la pantalla principal
+            Application.Current.MainPage = new MasterPage();
         }
     }
 }

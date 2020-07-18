@@ -3,65 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Escolar2020.UIForms.Views.TutorsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Tutor">
+             Title="{Binding Usuario}">
+    <!--Menu Top
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="ic_action_create" Command="{Binding AddInfoCommand}"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Tutors}"
             Padding="8">
-            <ListView
-                IsRefreshing="{Binding IsRefreshing}"
-                HasUnevenRows="True"
-                ItemsSource="{Binding Tutors}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SelectTutorCommand}"/>
-                                </Grid.GestureRecognizers>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Label
-                                    	FontAttributes="Bold"
-                                    	FontSize="Body"
-                                        Text="{Binding Parentesco}"
-                                    	TextColor="Black">
-                                </Label>
-                                <Image
-                                	Grid.Column="0"
-                                	Source="{Binding ImageFullPath}"
-                                	WidthRequest="100">
-                                </Image>
-                                <StackLayout
-                                	Grid.Column="1"
-                                	VerticalOptions="Center">
-                                    <Label
-                                    	FontSize="Medium"
-                                        Text="{Binding ClaveFamilia}"
-                                    	TextColor="CadetBlue">
-                                    </Label>
-                                    <Label
-                                    	FontSize="Small"
-                                    	Text= "{Binding Name}"
-                                    	TextColor="Black">
-                                    </Label>
-                                </StackLayout>
-                                <Image
-                                	Grid.Column="2"
-                                	Source="ic_launcher"
-                                	WidthRequest="100">
-                                </Image>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Label
+                Text="{Binding ClaveFamilia}"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Regresar" HorizontalOptions="StartAndExpand" Clicked="OnBackButtonClicked"/>
+                <Button Text="Siguiente" HorizontalOptions="EndAndExpand" Clicked="OnForwardButtonClicked"/>
+            </StackLayout>
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning}"
+                VerticalOptions="CenterAndExpand">
+            </ActivityIndicator>
+            <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
+            <WebView x:Name="webView" WidthRequest="1000" HeightRequest="1000"
+                     Navigated="webviewNavigated" Navigating="webviewNavigating"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

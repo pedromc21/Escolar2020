@@ -12,6 +12,9 @@
             <infra:InstanceLocator x:Key="Locator"/>
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">http://app_escolar.gissa.com.mx</x:String>
+            <x:String x:Key="UrlBienvenida">http://www.gissa.com.mx/</x:String>
+            <x:String x:Key="UrlPago">https://portal.app-imex.com/</x:String>
+            <x:String x:Key="UrlCole">https://www.imex.edu.mx/blog/</x:String>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

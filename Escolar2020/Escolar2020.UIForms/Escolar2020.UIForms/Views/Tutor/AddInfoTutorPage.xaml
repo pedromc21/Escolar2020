@@ -1,15 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Escolar2020.UIForms.Views.Tutor.AddInfoTutorPage">
+             x:Class="Escolar2020.UIForms.Views.Tutor.AddInfoTutorPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+         	 Title="Datos">
     <ContentPage.Content>
         <ScrollView
         	BindingContext="{Binding AddInfo}">
             <StackLayout
             	Padding="10">
+                <Label
+                	FontSize="Large"
+                	HorizontalOptions="Center"
+                	Text="Tutor">
+                </Label>
+                <Label
+                	FontSize="Large"
+                	HorizontalOptions="Center"
+                	Text="{Binding FullName}">
+                </Label>
                 <Image
                 	HeightRequest="150"
-                	Source="{Binding Tutor.ImageFullPath}">
+                	Source="{Binding ImageFullPath}">
                 </Image>
                 <Label
                 	FontSize="Micro"
@@ -24,51 +36,63 @@
                     <Label
                     	Grid.Column="0"
                     	Grid.Row="0"
-                    	Text="Profesión:"
+                    	Text="Parentesco:"
                     	VerticalOptions="Center">
                     </Label>
                     <Entry
                     	Grid.Column="1"
                     	Grid.Row="0"
-                    	Placeholder="Escribe tu Profesion"
-                    	Text="{Binding Profesion}">
+                    	Placeholder="Escribe tu Parentesco"
+                    	Text="{Binding Tutor.Parentesco}">
                     </Entry>
                     <Label
                     	Grid.Column="0"
                     	Grid.Row="1"
+                    	Text="Profesión:"
+                    	VerticalOptions="Center">
+                    </Label>
+                    <Entry
+                    	Grid.Column="1"
+                    	Grid.Row="1"
+                    	Placeholder="Escribe tu Profesion"
+                    	Text="{Binding Tutor.Profesion}">
+                    </Entry>
+                    <Label
+                    	Grid.Column="0"
+                    	Grid.Row="2"
                     	Text="Empresa:"
                     	VerticalOptions="Center">
                     </Label>
                     <Entry
                     	Grid.Column="1"
-                    	Grid.Row="1"
+                    	Grid.Row="2"
                     	Placeholder="Escribe la Empresa donde laboras"
-                    	Text="{Binding Empresa}">
+                    	Text="{Binding Tutor.NombreEmpresa}">
                     </Entry>
                     <Label
                     	Grid.Column="0"
-                    	Grid.Row="2"
+                    	Grid.Row="3"
                     	Text="Puesto:"
                     	VerticalOptions="Center">
                     </Label>
                     <Entry
                     	Grid.Column="1"
-                    	Grid.Row="2"
+                    	Grid.Row="3"
                     	Placeholder="Escribe tu Puesto"
-                    	Text="{Binding Puesto}">
+                    	Text="{Binding Tutor.PuestoEmpresa}">
                     </Entry>
                     <Label
                     	Grid.Column="0"
-                    	Grid.Row="3"
+                    	Grid.Row="4"
                     	Text="Telefono:"
                     	VerticalOptions="Center">
                     </Label>
                     <Entry
                     	Grid.Column="1"
-                    	Grid.Row="3"
+                    	Grid.Row="4"
                     	Keyboard="Numeric"
                     	Placeholder="Escribe el telefono de tu trabajo"
-                    	Text="{Binding Telefono}">
+                    	Text="{Binding Tutor.TelefonoTrabajo}">
                     </Entry>
                 </Grid>
                 <ActivityIndicator
@@ -76,14 +100,14 @@
                 	VerticalOptions="CenterAndExpand">
                 </ActivityIndicator>
                 <Button
-                	BackgroundColor="Navy"
+                	BackgroundColor="LightSkyBlue"
                 	BorderRadius="23"
                 	Command="{Binding SaveCommand}"
                 	HeightRequest="46"
                     HorizontalOptions="FillAndExpand"
                 	IsEnabled="{Binding IsEnabled}"
                 	Text="Guardar"
-                	TextColor="White">
+                	TextColor="DarkBlue">
                 </Button>
             </StackLayout>
         </ScrollView>

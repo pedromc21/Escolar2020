@@ -89,17 +89,16 @@
             this.Tutors = new ObservableCollection<TutorItemViewModel>(myTutors.Select(p => new TutorItemViewModel
             {
                 Id = p.Id,
-                ImageUrl = p.ImageUrl,
-                ImageFullPath = p.ImageFullPath,
-                //IsAvailabe = p.IsAvailabe,
-                //LastPurchase = p.LastPurchase,
-                //LastSale = p.LastSale,
-                PuestoEmpresa = p.PuestoEmpresa,
-                NombreEmpresa = p.NombreEmpresa,
+                PersonaId = p.PersonaId,
+                ClaveFamilia = p.ClaveFamilia,
+                Parentesco = p.Parentesco,
                 Profesion = p.Profesion,
-                TelefonoTrabajo = p.TelefonoTrabajo
+                NombreEmpresa = p.NombreEmpresa,
+                PuestoEmpresa = p.PuestoEmpresa,               
+                TelefonoTrabajo = p.TelefonoTrabajo,
+                CPerson = p.CPerson 
+                //NombreFull = p.NombreFull
             })
-            .OrderBy(p => p.Name)
             .ToList());
         }
     }

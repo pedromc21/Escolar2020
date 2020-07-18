@@ -11,92 +11,71 @@
         private bool isRunning;
         private bool isEnabled;
         public Tutor Tutor { get; set; }
+
         private readonly ApiService apiService;
-        public string Image { get; set; }
-
-        public AddInfoViewModel(Tutor tutor)
-        {
-            this.Tutor = tutor;
-        }
-
+        public string FullName { get; set; }
+        public string ImageFullPath { get; set; }
+        
         public bool IsRunning
         {
             get => isRunning;
             set => SetValue(ref isRunning, value);
         }
-
         public bool IsEnabled
         {
             get => isEnabled;
             set => SetValue(ref isEnabled, value);
         }
-
-        public string Profesion { get; set; }
-        public string Empresa { get; set; }
-        public string Puesto { get; set; }
-        public string Telefono { get; set; }
-
         public ICommand SaveCommand => new RelayCommand(Save);
-
         public AddInfoViewModel()
         {
             apiService = new ApiService();
-            Image = "Not_image";
+        }
+        public AddInfoViewModel(Tutor tutor)
+        {
+            Tutor = tutor;
+            FullName = Tutor.CPerson.FullName;
+            ImageFullPath = Tutor.CPerson.ImageFullPath;
+            apiService = new ApiService();
             IsEnabled = true;
         }
         private async void Save()
         {
-            if (string.IsNullOrEmpty(Profesion))
+            if (string.IsNullOrEmpty(this.Tutor.Profesion))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Escriba su profesión.", "Aceptar");
                 return;
             }
-
-            if (string.IsNullOrEmpty(Empresa))
+            if (string.IsNullOrEmpty(this.Tutor.NombreEmpresa))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Escriba su Empresa.", "Aceptar");
                 return;
             }
-
-            if (string.IsNullOrEmpty(Puesto))
+            if (string.IsNullOrEmpty(this.Tutor.PuestoEmpresa))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Escriba su puesto.", "Aceptar");
                 return;
             }
-
             IsRunning = true;
             IsEnabled = false;
-
-            //TODO: Add image
-            var tutor = new Tutor
-            {
-                //IsAvailabe = true,
-                PuestoEmpresa = this.Puesto,
-                Profesion = this.Profesion,
-                NombreEmpresa = this.Empresa,
-                TelefonoTrabajo = this.Telefono 
-                //User = new User { UserName = MainViewModel.GetInstance().UserEmail }    
-            };
             var url = Application.Current.Resources["UrlAPI"].ToString();
-            var response = await apiService.PostAsync(
+            var response = await apiService.PutAsync(
                 url,
                 "/api",
                 "/App_Tutor",
-                tutor,
+                Tutor.Id,
+                Tutor,
                 "bearer",
                 MainViewModel.GetInstance().Token.Token);
-
+            IsRunning = false;
+            IsEnabled = true;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
                 return;
             }
-
-            var newTutor = (Tutor)response.Result;
-            MainViewModel.GetInstance().Tutors.Tutors.Add(newTutor);
-
-            IsRunning = false;
-            IsEnabled = true;
+            var modifiedTutor = (Tutor)response.Result;
+            MainViewModel.GetInstance().Tutors.UpdateTutorInList(modifiedTutor);
             await App.Navigator.PopAsync();
         }
     }

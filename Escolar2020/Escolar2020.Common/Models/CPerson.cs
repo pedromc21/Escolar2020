@@ -54,12 +54,18 @@
         public string ImageUrl { get; set; }
 
         [JsonProperty("imageFullPath")]
-        public object ImageFullPath { get; set; }
+        public string ImageFullPath { get; set; }
 
         [JsonProperty("user")]
-        public object User { get; set; }
+        public string User { get; set; }
 
         [JsonProperty("fullName")]
-        public string FullName { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $" {ApellidoPaterno} {ApellidoMaterno} {Nombres}";
+            }
+        }
     }
 }

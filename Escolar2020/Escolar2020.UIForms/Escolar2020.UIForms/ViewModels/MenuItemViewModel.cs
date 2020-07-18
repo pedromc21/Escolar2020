@@ -1,6 +1,7 @@
 ﻿namespace Escolar2020.UIForms.ViewModels
 {
-    using Escolar2020.UIForms.Views;
+    using Common.Helpers;
+    using Views;
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
@@ -36,6 +37,10 @@
                     await App.Navigator.PushAsync(new Views.Tutor.PagarPage());
                     break;
                 default:
+                    Settings.IsRemember = false;
+                    Settings.Token = string.Empty;
+                    Settings.UserEmail = string.Empty;
+                    Settings.UserPassword = string.Empty;
                     MainViewModel.GetInstance().Login = new LoginViewModel();
                     Application.Current.MainPage = new NavigationPage(new LoginPage());
                     break;

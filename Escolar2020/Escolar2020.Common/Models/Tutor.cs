@@ -31,43 +31,6 @@
 
         [JsonProperty("c_Person")]
         public CPerson CPerson { get; set; }
-
-        [JsonProperty("nombre")]
-        public string Nombre { get; set; }
-
-        [JsonProperty("fechaNac")]
-        public DateTimeOffset FechaNac { get; set; }
-
-        [JsonProperty("sexo")]
-        public string Sexo { get; set; }
-
-        [JsonProperty("telefono")]
-        public string Telefono { get; set; }
-
-        [JsonProperty("celular")]
-        public string Celular { get; set; }
-
-        [JsonProperty("eMail")]
-        public string EMail { get; set; }
-
-        [JsonProperty("curp")]
-        public string Curp { get; set; }
-
-        [JsonProperty("imageFullPath")]
-        public string ImageFullPath { get; set; }
-
-        [JsonProperty("imageUrl")]
-        public string ImageUrl { get; set; }
-        public override string ToString()
-        {
-            return $"{this.ClaveFamilia} {CPerson.ApellidoPaterno} {CPerson.ApellidoMaterno} {CPerson.Nombres}"; 
-        }
-        public string Name
-        {
-            get
-            {
-                return $" {CPerson.ApellidoPaterno} {CPerson.ApellidoMaterno} {CPerson.Nombres}";
-            }
-        }
+        
     }
 }
