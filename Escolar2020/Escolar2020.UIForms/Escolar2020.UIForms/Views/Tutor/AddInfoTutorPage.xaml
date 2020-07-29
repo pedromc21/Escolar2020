@@ -20,8 +20,10 @@
                 	Text="{Binding FullName}">
                 </Label>
                 <Image
-                	HeightRequest="150"
-                	Source="{Binding ImageFullPath}">
+                	Source="{Binding ImageSource}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
+                    </Image.GestureRecognizers>
                 </Image>
                 <Label
                 	FontSize="Micro"

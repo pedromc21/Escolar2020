@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Erreur</value>
   </data>
   <data name="ErrorUser" xml:space="preserve">
-    <value>Escriba el Usuario</value>
+    <value>Entrez l&amp;#39;utilisateur!</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Aceptar</value>
+    <value>OK</value>
   </data>
   <data name="ErrorPassword" xml:space="preserve">
-    <value>Escriba la contraseña</value>
+    <value>Tapez le mot de passe :</value>
   </data>
   <data name="ErrorLogin" xml:space="preserve">
-    <value>Usuario o Contraseña incorrecto.</value>
+    <value>Identifiant ou mot de passe incorrect.!</value>
   </data>
   <data name="Usuario" xml:space="preserve">
-    <value>Usuario</value>
+    <value>Utilisateur.</value>
   </data>
   <data name="Contraseña" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>MOT DE PASSE</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Loguear</value>
+    <value>S&amp;#39;identifier!</value>
   </data>
   <data name="Recuerdame" xml:space="preserve">
-    <value>Recordarme en este dispositivo</value>
+    <value>Rappelez-moi sur cet appareil!</value>
   </data>
   <data name="PlaceholderUser" xml:space="preserve">
-    <value>Escribe tu usuario</value>
+    <value>Entrez votre utilisateur!</value>
   </data>
   <data name="PlaceholderContraseña" xml:space="preserve">
-    <value>Escribe tu contraseña</value>
+    <value>Saisissez votre mot de passe.</value>
   </data>
 </root>

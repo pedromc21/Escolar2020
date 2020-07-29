@@ -3,6 +3,7 @@
     using Escolar2020.Common.Helpers;
     using Escolar2020.Common.Models;
     using Escolar2020.Common.Services;
+    using Escolar2020.UIForms.Helpers;
     using Escolar2020.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
     using Newtonsoft.Json;
@@ -40,12 +41,12 @@
         {
             if (string.IsNullOrEmpty(Email))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Escriba el Usuario", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorUser, Languages.Ok);
                 return;
             }
             if (string.IsNullOrEmpty(Password))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Escriba la contraseña", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorPassword, Languages.Ok);
                 return;
             }
             IsRunning = true;
@@ -68,7 +69,7 @@
 
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Usuario o password incorrecto.", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.ErrorLogin, Languages.Ok);
                 return;
             }
 
@@ -79,6 +80,7 @@
             mainViewModel.Token = token;
             //Singleton para Instanciar ViewModel en Memoria
             mainViewModel.Tutors = new TutorsViewModel();
+
             //Guardar datos en persistencia
             Settings.IsRemember = this.IsRemember;
             Settings.UserEmail = this.Email;

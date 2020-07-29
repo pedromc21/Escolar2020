@@ -121,33 +121,33 @@
     <value>Error</value>
   </data>
   <data name="ErrorUser" xml:space="preserve">
-    <value>Escriba el Usuario</value>
+    <value>Type the User!</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Aceptar</value>
+    <value>OK</value>
   </data>
   <data name="ErrorPassword" xml:space="preserve">
-    <value>Escriba la contraseña</value>
+    <value>Please enter your password.</value>
   </data>
   <data name="ErrorLogin" xml:space="preserve">
-    <value>Usuario o Contraseña incorrecto.</value>
+    <value>Wrong Login Or Password</value>
   </data>
   <data name="Usuario" xml:space="preserve">
-    <value>Usuario</value>
+    <value>User</value>
   </data>
   <data name="Contraseña" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>Password</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Loguear</value>
+    <value>Login</value>
   </data>
   <data name="Recuerdame" xml:space="preserve">
-    <value>Recordarme en este dispositivo</value>
+    <value>Remember me on this device</value>
   </data>
   <data name="PlaceholderUser" xml:space="preserve">
-    <value>Escribe tu usuario</value>
+    <value>Type your username</value>
   </data>
   <data name="PlaceholderContraseña" xml:space="preserve">
-    <value>Escribe tu contraseña</value>
+    <value>Enter your password</value>
   </data>
 </root>

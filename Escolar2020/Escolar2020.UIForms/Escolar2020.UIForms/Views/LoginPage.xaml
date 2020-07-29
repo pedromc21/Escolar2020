@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:Escolar2020.UIForms.Helpers"
              x:Class="Escolar2020.UIForms.Views.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Login" Padding="0,0,10,10">
+             Title="{i18n:Translate Login}" Padding="0,0,10,10">
     <ContentPage.Content>
         <ScrollView
             BindingContext="{Binding Login}">
@@ -16,21 +17,21 @@
                 <Label 
                     FontSize="Large"
                     FontAttributes="Bold"
-                    Text="Usuario:"></Label>
-                <Entry Placeholder="Escribe tu usuario" 
+                    Text="{i18n:Translate Usuario}"></Label>
+                <Entry Placeholder="{i18n:Translate PlaceholderUser}" 
                        Text="{Binding Email}"></Entry>
                 <Label 
                     FontSize="Large"
                     FontAttributes="Bold"
-                    Text="Contraseña:"></Label>
+                    Text="{i18n:Translate Contraseña}"></Label>
                 <Entry IsPassword="True" 
-                       Placeholder="Escribe tu contraseña" 
+                       Placeholder="{i18n:Translate PlaceholderContraseña}" 
                        Text="{Binding Password}"></Entry>
                 <StackLayout
 	                HorizontalOptions="Center"
 	                Orientation="Horizontal">
                     <Label
-    	                Text="Recordarme en este dispositivo"
+    	                Text="{i18n:Translate Recuerdame}"
     	                VerticalOptions="Center">
                     </Label>
                     <Switch
@@ -48,7 +49,7 @@
                     FontSize="Large"
                     HeightRequest="46"
                     IsEnabled="{Binding IsEnabled}"
-                    Text="Login"
+                    Text="{i18n:Translate Login}"
                     TextColor="DarkBlue">
                 </Button>
             </StackLayout>

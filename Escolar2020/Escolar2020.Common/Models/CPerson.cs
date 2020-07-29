@@ -58,6 +58,7 @@
 
         [JsonProperty("user")]
         public string User { get; set; }
+        public byte[] ImageArray { get; set; }
 
         [JsonProperty("fullName")]
         public string FullName

@@ -7,6 +7,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+    using System.IO;
+    using System;
 
     [Route("api/[Controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -44,8 +46,20 @@
 			{
 				return this.BadRequest("Invalid user");
 			}
-
-			//TODO: Upload images
+			var imageUrl = string.Empty;
+			if (Tutor.CPerson.ImageArray != null && Tutor.CPerson.ImageArray.Length > 0)
+			{
+				var stream = new MemoryStream(Tutor.CPerson.ImageArray);
+				var guid = Guid.NewGuid().ToString();
+				var file = $"{guid}.jpg";
+				var folder = "wwwroot\\images\\Products";
+				var fullPath = $"~/images/Products/{file}";
+				var response = FilesHelper.UploadPhoto(stream, folder, file);
+				if (response)
+				{
+					imageUrl = fullPath;
+				}
+			}
 			var entityTutor = new App_Tutor
 			{
 				Persona_Id = Tutor.PersonaId,
@@ -54,7 +68,8 @@
 				Profesion = Tutor.Profesion,
 				Nombre_Empresa = Tutor.NombreEmpresa,
 				Puesto_Empresa = Tutor.PuestoEmpresa,
-				Telefono_Trabajo = Tutor.TelefonoTrabajo
+				Telefono_Trabajo = Tutor.TelefonoTrabajo,
+				ImageUrl = imageUrl
 			};
 
 			var newTutor = await this.tutorRepository.CreateAsync(entityTutor);

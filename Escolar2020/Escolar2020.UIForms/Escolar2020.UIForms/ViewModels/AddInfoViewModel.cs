@@ -3,6 +3,8 @@
     using Common.Models;
     using Common.Services;
     using GalaSoft.MvvmLight.Command;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -11,11 +13,16 @@
         private bool isRunning;
         private bool isEnabled;
         public Tutor Tutor { get; set; }
-
         private readonly ApiService apiService;
-        public string FullName { get; set; }
-        public string ImageFullPath { get; set; }
-        
+        public string FullName { get; set; }       
+        private ImageSource imageSource;
+        private MediaFile file;
+        public ImageSource ImageSource
+        {
+            get => this.imageSource;
+            set => this.SetValue(ref this.imageSource, value);
+        }
+
         public bool IsRunning
         {
             get => isRunning;
@@ -26,6 +33,7 @@
             get => isEnabled;
             set => SetValue(ref isEnabled, value);
         }
+        public ICommand ChangeImageCommand => new RelayCommand(this.ChangeImage);
         public ICommand SaveCommand => new RelayCommand(Save);
         public AddInfoViewModel()
         {
@@ -33,10 +41,10 @@
         }
         public AddInfoViewModel(Tutor tutor)
         {
+            apiService = new ApiService();
             Tutor = tutor;
             FullName = Tutor.CPerson.FullName;
-            ImageFullPath = Tutor.CPerson.ImageFullPath;
-            apiService = new ApiService();
+            ImageSource = "Not_image";
             IsEnabled = true;
         }
         private async void Save()
@@ -77,6 +85,46 @@
             var modifiedTutor = (Tutor)response.Result;
             MainViewModel.GetInstance().Tutors.UpdateTutorInList(modifiedTutor);
             await App.Navigator.PopAsync();
+        }
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize();
+            //Dialogo con varias opciones
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                "Donde tomas la foto?",
+                "Cancelar",
+                null,
+                "De la galería",
+                "De la cámara");
+            if (source == "Cancelar")
+            {
+                this.file = null;
+                return;
+            }
+            if (source == "De la cámara")
+            {
+                this.file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Pictures",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
         }
     }
 }

@@ -34,5 +34,21 @@
     <string>Escolar2020.UIForms</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+      <string>en</string>
+      <string>fr</string>
+      <string>it</string>
+    </array>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>es-Mx</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Esta aplicación necesita acceso a la cámara para tomar fotos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Esta aplicación necesita acceso a fotos.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Esta aplicación necesita acceso al micrófono.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Esta aplicación necesita acceso a la galería de fotos.</string>
 </dict>
 </plist>
